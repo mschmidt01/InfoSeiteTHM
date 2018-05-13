@@ -1,0 +1,8 @@
+Every folder contains one .js, .html and .css file. 
+Html and css are only ment to give you an impression of how the animation might look like in the end
+and of course to have an overview over the most important elements of the animation.
+
+the .js files are not yet functions to be called. Only working js. After deciding which to use and finishing all adjustments we can 
+encapsulate them as functions for easier use.
+
+
