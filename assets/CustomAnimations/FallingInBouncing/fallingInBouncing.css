@@ -1,0 +1,17 @@
+/*Bouncing Effect does not work if the elements are contained by another div-element*/
+
+
+#T,#H,#M{
+  /* These are needed to ensure that the falling divs are not overlapping*/
+  left: 40%; /*adjust to center the animation */
+  position: relative;
+  display: inline-block;
+
+  /* These are needed for design only*/
+  text-align: center;
+  color: red;
+  font-size: 100px;
+  opacity: 0.0;
+
+
+}
