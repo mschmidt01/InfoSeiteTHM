@@ -1,0 +1,83 @@
+1,Audiovisuelle Medien 2: Filmtechnik,MIB12a,3,"Vorlesung (2 SWS), Praktikum (2 SWS)",3,Allgemein,ja,Audiovisuelle Medien 1 und Mediengestaltung 1,Audiovisuelle Medien 3,Keine,"1. Teilleistung: Studientagebuch (50% der Endnote)
+2. Teilleistung: Klausur (50% der Endnote)
+Die 2. Teilleistung darf nur begonnen werden, wenn die 1. Teilleistung zuvor bestanden wurde.","6, 7, 11"
+2,Audiovisuelle Medien 2: Filmproduktion,MIB12b,3,"Vorlesung (2 SWS), Praktikum (2 SWS)",3,Allgemein,ja,Audiovisuelle Medien 1 und Mediengestaltung 1,Audiovisuelle Medien 3,Anwesenheit,Praktikum,"6, 7, 11"
+3,Datenbanken,MIB13,6,"Vorlesung (4 SWS), Praktikum (2 SWS)",3,Web&Mobile,ja,keine,keine,Testat,Klausur,
+4,Softwareentwicklungsprojekt,MIB14,9,,4,Allgemein,ja,Softwareentwicklung 2,keine,Anwesenheit,"1. Teilleistung: Klausur (50% der Endnote)
+2. Teilleistung: Projekt (50% der Endnote)",14
+5,Grafische Datenverarbeitung: Modellierung ,MIB1,6,"Vorlesung (4 SWS)
+Praktikum (2 SWS)",1,Allgemein,ja,keine,"Grafische DV: Shading/Rendering 
+Grafische DV: Animation",Testat,Klausur,
+6,Audiovisuelle Medien 1: Studiotechnik,MIB2a,4,"Vorlesung (2 SWS)
+Praktikum (2 SWS)",1,Allgemein,ja,keine,Audiovisuelle Medien 2,Keine,"1. Teilleistung: Studientagebuch (50% der Endnote)
+2. Teilleistung: Klausur (50% der Endnote)
+Die 2. Teilleistung darf nur begonnen werden, 
+wenn die 1. Teilleistung zuvor bestanden wurde.",
+7,Audiovisuelle Medien1: Studioproduktion,MIB2b,5,"Vorlesung (4 SWS)
+Praktikum (2 SWS)",1,Allgemein,ja ,keine,Audiovisuelle Medien 2,Anwesenheit,Praktikum,
+8,Web-Programmierung 1,MIB3,6,"Vorlesung (4 SWS)
+Praktikum (2 SWS)",1,Allgemein,ja ,keine,Web-Programmierung 2,Testat,Klausur,
+9,"Softwareentwicklung 1:
+Einführung in die Programmierung",MIB4a,3,"Vorlesung (2 SWS)
+Praktikum (2 SWS)",1,Allgemein,ja,keine,"Softwareentwicklung 2
+Theoretische Informatik und Algorithmik",Testat,Klausur,
+10,"Softwareentwicklung 1:
+Reflexives Lernen",MIB4b,3,Seminar (2 SWS),1,Allgemein,ja,keine,"Softwareentwicklung 2
+",Testat,keine,
+11,Mediengestaltung 1: Bewegtbild und Ton,MIB5,3,Seminar (3 SWS),1,Allgemein,ja,keine,Audiovisuelle Medien 2,Testat,Schriftliche Ausarbeitung,
+12,Grafische Datenverarbeitung: Shading/Rendering,MIB6,6,"Vorlesung (2 SWS)
+Praktikum (2 SWS)",2,Allgemein,ja,Grafische DV: Modellierung,Grafische DV: Animation,Testat,Klausur,5
+47,Beleuchtung,TEC07,5,4 SWS,2,Medienproduktion,nein,Modul Mathematik,keine,Anwesenheit,Klausur,16
+13,Web-Programmierung 2,MIB7,6,"Vorlesung (3 SWS)
+Praktikum (2 SWS)",2,Allgemein,ja,Web-Programmierung 1,keine,Testat,Klausur,8
+14,Softwareentwicklung 2,MIB8,6,"Vorlesung (4 SWS)
+Praktikum (2 SWS)",2,Allgemein,ja,Softwareentwicklung 1,"Softwareentwicklungsprojekt
+Theoretische Informatik und Algorithmik
+Mobile Anwendungen",Testat,Klausur,"9, 10"
+15,Mediengestaltung 2: Text und Bild,MIB9,6,"Vorlesung (4 SWS)
+Praktikum (2 SWS)",2,Allgemein,ja,Mediengestaltung 1,keine,Testat,Klausur,
+17,Grafische Datenverarbeitung: Animation,MIB11,6,"Vorlesung (4 SWS), Praktikum (2 SWS)",3,Medienproduktion,ja,Grafische DV: Modellierung,Wahlpflichtfächer Grafische Datenverarbeitung,Testat,Projekt,5
+16,Mathematik,MIB10,6,"Vorlesung (2 SWS)
+Übung (2 SWS)",2,Allgemein,ja,keine,Theoretische Informatik und Algorithmik,Testat,Klausur,
+18,Softwareentwicklungsprojekt,MIB14,9,"Vorlesung (2 SWS), Übung (2 SWS), Praktikum (2 SWS)",3,Allgemein,ja,Softwareentwicklung 2,keine,Anwesenheit,"1. Teilleistung: Klausur (50% der Endnote)
+2. Teilleistung: Projekt (50% der Endnote)",14
+19,Theoretische Informatik und Algorithmik,MIB15,6,"Vorlesung (4 SWS), Übung (2 SWS)",3,Allgemein,ja,Softwareentwicklung 1 und Mathematik,keine,Keine,Klausur,"9, 10, 16"
+48,CAD,TEC06,5,4 SWS,3,Medienproduktion,nein,"Module Mathematik, Physik, Modul Technische Mechanik/Werkstoffkunde und Modul Textmanufaktur",keine,Anwesenheit,Portfolio,16
+20,Einführung in die BWL,MIB16,3,Vorlesung (2 SWS),3,Allgemein,ja,keine,Unternehmensgründung und -führung,Keine,Klausur,
+21,Audiovisuelle Medien 3: Outside and Remote Technology,MIB17a,3,"Vorlesung (2 SWS), Seminar (2 SWS)",4,Medienproduktion,ja,Audiovisuelle Medien 2,keine,Keine,Schriftliche Ausarbeitung,"1, 2"
+22,"Audiovisuelle Medien 3: Outside and Remote Production",MIB17b,3,"Seminar (2 SWS), Praktikum (2 SWS)",4,Medienproduktion,ja,Audiovisuelle Medien 2,keine,Anwesenheit,Projekt,"1, 2"
+23,Medien-Projekt: Themenschwerpunkt „Medienproduktion“,MIB18,9,"Vorlesung (2 SWS), Praktikum (2 SWS)",4,Medienproduktion,ja,Die empfohlenen projektspezifischen Voraussetzungen werden zu Beginn der Veranstaltung bekannt gegeben,keine,Anwesenheit,Projekt,
+24,Mobile Anwendungen 1,MIB19,6,"Vorlesung (3 SWS), Praktikum (2 SWS)",4,Allgemein,ja,Softwareentwicklung 2,Mobile Anwendungen 2,Keine,Klausur,14
+25,IT- und Medienrecht,MIB21,3,Vorlesung (3 SWS),4,Allgemein,ja,keine,Unternehmensgründung und -führung,Keine,Klausur,
+26,Seminar: Themenschwerpunkt „Medienproduktion“,MIB22,6,"Seminar (4 SWS), unterteilt in 2 SWS Englisch und 2 SWS Fachseminar",4,Medienproduktion,ja,Eingangsniveau Englisch B1 gemäß GER,Bachelorarbeit,Anwesenheit,"Schriftliche Ausarbeitung mit Präsentation,
+ mindestens jeweilige Kurzfassung in Englisch",
+28,Praxisphase : Praxisseminar,MIB23b,3,Seminar (1 SWS),6,Allgemein,ja,"Praxisprojekt und das Praxisseminar werden in der Regel im gleichen Semester gemeinsam absolviert, wobei die Informationsveranstaltungen vor Beginn des Praxisprojektes und die Präsentation über das eigene Praxisprojekt nach deren Durchführung stattfinden sollen. Die Regelungen zum Praxisseminar sind in der Ordnung über die Praxisphase (Anlage 3 zur Prüfungsordnung) beschrieben",Bachelorarbeit,Keine,Präsentation,
+34,Fotografie und Bildbearbeitung,MIB35,6,"Seminar (2 SWS), Praktikum (2 SWS)",5,Allgemein,nein,keine,keine,Testat,Projekt,
+35,Unternehmensgründung und -führung,MIB36,6,"Seminar (2 SWS), Praktikum (2 SWS)",5,Allgemein,nein,Einführung in die BWL und IT- und Medienrecht,keine,Anwesenheit,Schriftliche Ausarbeitung mit Präsentation,"20, 25"
+49,Medientechnik II,TEC11,5,4 SWS,4,Medienproduktion,nein,"Module Grundlagen Elektrotechnik, CAD, Beleuchtung, Beschallung, Modul Textmanufaktur, Teilnahme an praktischen Übungseinheiten innerhalb der Lehrveranstaltung als Zulassungsvoraussetzung für die Klausur, Anzahl und
+Art der Übungseinheiten werden rechtzeitig vor Semesterbeginn und in
+geeigneter Weise den Studierenden mitgeteilt und erläutert.",keine,Anwesenheit,Portfolio,"48, 47"
+30,Fortgeschrittene Modellierung,MIB25,6,"Vorlesung (2 SWS), Praktikum (2 SWS)",5,Medienproduktion,nein,Grafische Datenverarbeitung: Modellierung,keine,Testat,Projekt,5
+31,Dynamik und Effekte,MIB26,6,"Vorlesung (2 SWS), Praktikum (2 SWS)",5,Medienproduktion,nein,Grafische Datenverarbeitung: Animation,Motion-Design,Testat,Projekt,17
+32,Motion-Design,MIB27,6,"Vorlesung (2 SWS), Praktikum (2 SWS)",5,Medienproduktion,nein,Dynamik und Effekte,keine,Testat,Projekt,31
+33,e.media International Summer School,MIB28,6,Praktikum (4 SWS) als Blockveranstaltung,5,Medienproduktion,nein,"Grafische DV: Modellierung, Grafische DV: Shading/Rendering",keine,Anwesenheit,Projekt,"5,12"
+36,Medien-Projekt mit Themenschwerpunkt „Web&Mobile“,MIB18,9,"Vorlesung (2 SWS), Praktikum (2 SWS)",4,Web&Mobile,ja,Die empfohlenen projektspezifischen Voraussetzungen werden zu Beginn der Veranstaltung bekannt gegeben,keine,Anwesenheit,Projekt,
+37,Netzwerksicherheit,MIB20,6,"Vorlesung (4 SWS), Praktikum (2 SWS)",4,Web&Mobile,ja,keine,keine,Keine,"1. Teilleistung (unbenotet,
+ vgl. § 3 Abs. 6 der Allgemeinen Bestimmungen):
+ Praktikum 2. Teilleistung (benotet):
+  Klausur,  mündliche Prüfung  oder schriftliche
+ Ausarbeitung mit Präsentation (wird
+ jeweils zu Beginn des Semesters bekannt gegeben)",
+38,Seminar mit Themenschwerpunkt „Web&Mobile“,MIB22,6,"Seminar (4 SWS), unterteilt in 2 SWS Englisch und 2 SWS Fachseminar",4,Web&Mobile,ja,Eingangsniveau Englisch B1 gemäß GER,Bachelorarbeit,Anwesenheit,"Schriftliche Ausarbeitung mit Präsentation,
+ mindestens jeweilige Kurzfassung in Englisch",
+39,Praxisphase : Praxisprojekt mit Themenschwerpunkt „Web&Mobile“,MIB23a,12,Praktikum (Vollzeit),6,Web&Mobile,ja,Teilnahme an zwei Informationsveranstaltungen der Betreuungsstelle für Praxisphasen; Zulassung laut Prüfungsordnung Anlage 3,Bachelorarbeit,Keine,Schriftliche Ausarbeitung,
+40,Bachelorarbeit mit Kolloquium mit Themenschwerpunkt „Web&Mobile“,MIB24,15,,6,Web&Mobile,ja,"n Praxisprojekt (MIB23a) abgeschlossen, Praxisseminar (MIB23b) abgeschlossen bis zum Zeitpunkt des Kolloquiums und Voraussetzungen laut Prüfungsordnung",keine,Keine,Bachelorarbeit mit Kolloquium,"27,28"
+41,Mobile Anwendungen 2,MIB29,6,"Seminar (1 SWS), Praktikum (3 SWS)",5,Web&Mobile,nein,Mobile Anwendungen 1,keine,Anwesenheit,Projekt,24
+42,Internet of Things,MIB30,6,"Seminar (2 SWS), Praktikum (2 SWS)",5,Web&Mobile,nein,"Netzwerksicherheit, Webprogrammierung 2 und Mobile Anwendungen 1",keine,Testat,Projekt,"37,13,24"
+43,Frontend Development,MIB31,6,"Seminar (1 SWS), Praktikum (3 SWS)",5,Web&Mobile,nein,Web-Programmierung 1,keine,Anwesenheit,Projekt,8
+27,Praxisphase : Praxisprojekt,MIB23a,12,Praktikum (Vollzeit),6,Medienproduktion,ja,Teilnahme an zwei Informationsveranstaltungen der Betreuungsstelle für Praxisphasen; Zulassung laut Prüfungsordnung Anlage 3,Bachelorarbeit,Keine,Schriftliche Ausarbeitung,
+44,Content Management Systeme,MIB32,6,"Seminar (1 SWS), Praktikum (3 SWS)",5,Web&Mobile,nein,Web-Programmierung 2,keine,Anwesenheit,Projekt,13
+29,Bachelorarbeit mit Kolloquium,MIB24,15,,6,Medienproduktion,ja,"n Praxisprojekt (MIB23a) abgeschlossen, Praxisseminar (MIB23b) abgeschlossen bis zum Zeitpunkt des Kolloquiums und Voraussetzungen laut Prüfungsordnung",keine,Keine,Bachelorarbeit mit Kolloquium,"27, 28"
+45,Web-Frameworks,MIB33,5,"Seminar (2 SWS), Praktikum (2 SWS)",5,Web&Mobile,nein,Web-Programmierung 2,keine,Anwesenheit,Projekt,13
+46,Aktuelle Web&Mobile-Technologien,MIB34,5,"Seminar (1 SWS), Praktikum (3 SWS)",5,Web&Mobile,nein,Webprogrammierung 2 und Mobile Anwendungen 1,keine,Anwesenheit,Projekt,"13,24"
+ID,Titel,Kürzel,CrP,SWS,Semester,Allgemein,Pflicht,Vorgänger,Nachfolger,Prüfungsvorleistung,Prüfungsleistung,Abhängig Von
