@@ -1,0 +1,11 @@
+mpmApp.csvData = `1,Audiovisuelle Medien 2: Filmtechnik,MIB12a,3,"Vorlesung (2 SWS) Praktikum (2 SWS)",3,Allgemein,ja,Audiovisuelle Medien 1 und Mediengestaltung 1,Audiovisuelle Medien 3,Keine,"1. Teilleistung: Studientagebuch (50% der Endnote) 2. Teilleistung: Klausur (50% der Endnote) Die 2. Teilleistung darf nur begonnen werden wenn die 1. Teilleistung zuvor bestanden wurde.","6, 7, 11"
+2,Audiovisuelle Medien 2: Filmproduktion,MIB12b,3,"Vorlesung (2 SWS) Praktikum (2 SWS)",3,Allgemein,ja,Audiovisuelle Medien 1 und Mediengestaltung 1,Audiovisuelle Medien 3,Anwesenheit,Praktikum,"6, 7, 11"
+3,Datenbanken,MIB13,6,"Vorlesung (4 SWS) Praktikum (2 SWS)",3,Web&Mobile,ja,keine,keine,Testat,Klausur,
+4,Softwareentwicklungsprojekt,MIB14,9,,4,Allgemein,ja,Softwareentwicklung 2,keine,Anwesenheit,"1. Teilleistung: Klausur (50% der Endnote) 2. Teilleistung: Projekt (50% der Endnote)",14
+5,Grafische Datenverarbeitung: Modellierung ,MIB1,6,"Vorlesung (4 SWS) Praktikum (2 SWS)",1,Allgemein,ja,keine,"Grafische DV: Shading/Rendering Grafische DV: Animation",Testat,Klausur,
+6,Audiovisuelle Medien 1: Studiotechnik,MIB2a,4,"Vorlesung (2 SWS) Praktikum (2 SWS)",1,Allgemein,ja,keine,Audiovisuelle Medien 2,Keine,"1. Teilleistung: Studientagebuch (50% der Endnote) 2. Teilleistung: Klausur (50% der Endnote) Die 2. Teilleistung darf nur begonnen werden, wenn die 1. Teilleistung zuvor bestanden wurde.",
+7,Audiovisuelle Medien1: Studioproduktion,MIB2b,5,"Vorlesung (4 SWS) Praktikum (2 SWS)",1,Allgemein,ja ,keine,Audiovisuelle Medien 2,Anwesenheit,Praktikum,
+8,Web-Programmierung 1,MIB3,6,"Vorlesung (4 SWS) Praktikum (2 SWS)",1,Allgemein,ja ,keine,Web-Programmierung 2,Testat,Klausur,
+9,"Softwareentwicklung 1: Einführung in die Programmierung",MIB4a,3,"Vorlesung (2 SWS) Praktikum (2 SWS)",1,Allgemein,ja,keine,"Softwareentwicklung 2 Theoretische Informatik und Algorithmik",Testat,Klausur,
+10,"Softwareentwicklung 1: Reflexives Lernen",MIB4b,3,Seminar (2 SWS),1,Allgemein,ja,keine,"Softwareentwicklung 2 ",Testat,keine,
+11,Mediengestaltung 1: Bewegtbild und Ton,MIB5,3,Seminar (3 SWS),1,Allgemein,nein,keine,Audiovisuelle Medien 2,Testat,Schriftliche Ausarbeitung,`

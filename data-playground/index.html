@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Playground</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	<script>
+	let mpmApp = {}
+	</script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript">
+		window.csvDefinition = {
+			0: 'id',
+			1: 'title',
+			2: 'thmId',
+			3: 'creditPoints',
+			4: 'hoursPerWeek',
+			5: 'semester',
+			6: 'specialization',
+			7: 'isMandatory',
+			8: 'precursor',
+			9: 'successor',
+			10: 'examCondition',
+			11: 'dependsOn'
+		}
+		$(document).ready(function(ev) {
+			// initialize Data:
+			window.allModuleData = parseCsvData(mpmApp.csvData);
+			window.currentModuleData = window.allModuleData;
+			forceRerender();
+		})
+
+		forceRerender = () => {
+			$('#dataTable tr:not(#headerRow)').remove();
+			window.currentModuleData.forEach((item) => {
+				$('#dataTable').append(`<tr>
+					<td>${item.thmId}</td>	
+					<td>${item.title}</td>
+					<td>${item.specialization}</td>
+					<td>${item.isMandatory}</td>
+					<td>${item.examCondition}</td>
+				</tr>`)
+			})
+		}
+
+		parseCsvData = (dataString) => {
+			let lines = dataString.split('\n');
+			let linesParsed = lines.map(parseCsvLine)
+
+			return linesParsed;
+		} 
+
+		parseCsvLine = (lineString) => {
+			let module = {}
+			let objectValues = lineString.split(',');
+			objectValues.forEach((value, index, array) => {
+				if (window.csvDefinition[index]) {
+					module[window.csvDefinition[index]] = value;
+				}
+			})
+
+			return module;
+		}
+
+		filterBy = (property, value) => {
+			console.log(property)
+			console.log(value)
+			let filterFn = (module) => {
+				return (module[property].trim() == value.trim())
+			}
+
+			if (property === '') {
+				filterFn = () => {return true};
+			}
+
+			let filteredModuleData = _.filter(window.allModuleData, filterFn);
+
+			window.currentModuleData = filteredModuleData;
+			forceRerender();
+		}
+	</script>
+	<style type="text/css">
+		table, th, td {
+		   border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Data Playground</h1>
+	<button onclick="filterBy('isMandatory', 'ja')">nur pflichtmodule</button>
+	<button onclick="filterBy('', '')">alle module</button>
+	<button onclick="filterBy('examCondition', 'Anwesenheit')">anwesenheit</button>
+	<button onclick="filterBy('examCondition', 'Testat')">testat</button>
+	<table id="dataTable">
+		<tr id="headerRow">
+			<th>THM ID</th>
+			<th>Titel</th>
+			<th>Schwerpunkt</th>
+			<th>Pflicht</th>
+			<th>Prüfungsvorleistung</th>
+		</tr>
+	</table>
+</body>
+</html>
