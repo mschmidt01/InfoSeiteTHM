@@ -4,14 +4,95 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semesterplan</title>
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="assets/css/overview.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	<script>
+	let mpmApp = {}
+	</script>
+	<script type="text/javascript" src="assets/csv/data.js"></script>
+	<script type="text/javascript">
+		window.csvDefinition = {
+			0: 'id',
+			1: 'title',
+			2: 'thmId',
+			3: 'creditPoints',
+			4: 'hoursPerWeek',
+			5: 'semester',
+			6: 'specialization',
+			7: 'isMandatory',
+			8: 'precursor',
+			9: 'successor',
+			10: 'examCondition',
+			11: 'dependsOn'
+		}
+		$(document).ready(function(ev) {
+			// initialize Data:
+			window.allModuleData = parseCsvData(mpmApp.csvData);
+			window.currentModuleData = window.allModuleData;
+			forceRerender();
+		})
+
+		forceRerender = () => {
+			$('#dataTable tr:not(#headerRow)').remove();
+			window.currentModuleData.forEach((item) => {
+				$('#dataTable').append(`<tr>
+					<td>${item.thmId}</td>	
+					<td>${item.title}</td>
+					<td>${item.specialization}</td>
+					<td>${item.isMandatory}</td>
+					<td>${item.examCondition}</td>
+				</tr>`)
+			})
+		}
+
+		parseCsvData = (dataString) => {
+			let lines = dataString.split('\n');
+			let linesParsed = lines.map(parseCsvLine)
+
+			return linesParsed;
+		} 
+
+		parseCsvLine = (lineString) => {
+			let module = {}
+			let objectValues = lineString.split(',');
+			objectValues.forEach((value, index, array) => {
+				if (window.csvDefinition[index]) {
+					module[window.csvDefinition[index]] = value;
+				}
+			})
+
+			return module;
+		}
+
+		filterBy = (property, value) => {
+			console.log(property)
+			console.log(value)
+			let filterFn = (module) => {
+				return (module[property].trim() == value.trim())
+			}
+
+			if (property === '') {
+				filterFn = () => {return true};
+			}
+
+			let filteredModuleData = _.filter(window.allModuleData, filterFn);
+
+			window.currentModuleData = filteredModuleData;
+			forceRerender();
+		}
+	</script>
+	<style type="text/css">
+		table, th, td {
+		   border: 1px solid black;
+		}
+	</style>
   </head>
   <body>
 	<header>
 		<h2>Bachelor of Science</h2>
 		<h1>Medieninformatik</h1>
 	</header>
-	
 		<div id="filter" class="test">
 			<nav>
 			<ul>
@@ -24,13 +105,23 @@
 				<li><a href="#">6 Sem.</a></li>
 				<li><a href="#" aria-haspopup="true">Schwerpunkt</a> <!--hover on touch durch aria attribut -->
 					<ul>
-						<li><a href="#">Allgemein</a></li>
-						<li><a href="#">Web und Mobile</a></li>
-						<li><a href="#">Medienproduktion</a></li>
+						<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+						<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+						<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
 					</ul>
 				</li>
 			</ul>
 			</nav>
 		</div>
+		<button >nur pflichtmodule</button>
+		<table id="dataTable">
+			<tr id="headerRow">
+				<th>THM ID</th>
+				<th>Titel</th>
+				<th>Schwerpunkt</th>
+				<th>Pflicht</th>
+				<th>Prüfungsvorleistung</th>
+			</tr>
+		</table>
   </body>
 </html>
