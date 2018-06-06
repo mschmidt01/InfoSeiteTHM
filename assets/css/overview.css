@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+
+h1 { margin: 0px 0px 1em 0px; color: rgb(74,90,103); font-size: 2.5em; font-family: Verdana, Aria, Sans-serif; 
+		text-transform: uppercase; padding: 0px 0px 0px 200px; }
+h2 { margin: 0px 0px 0em 0px; color: rgb(74,90,103); font-size: 1.1em; font-family: Verdana, Aria, Sans-serif; 
+	font-weight: normal; letter-spacing: 0.1em; text-transform: uppercase; padding: 45px 0px 0px 200px; }
+
+nav { position: relative; padding: 45px 0px 0px 200px; }
+
+nav ul { list-style: none; margin: 0; /*border: 1px solid; border-color: rgb(74,90,103);*/ padding: 0; }
+
+
+nav ul::after { content: ''; display: block; clear: both; } /*creates pseudo element*/
+nav ul li:hover { background-color: rgba(47,184,228,.5)} /*beim untermenue bleibt hover bestehen*/
+nav ul li:hover > ul { display: block;} /*none wird mit block ersetzt, wenn hover*/
+
+nav ul li a { display: inline-block; color: rgb(57,70,81); font-size: .8em; font-family: Verdana, Aria, Sans-serif; 
+				letter-spacing: 0.1em; padding: 10px 10px; text-decoration: none; width: 125px; }
+nav ul li a:hover { background-color: rgb(47,184,228); color: #FFFF; }
+
+nav ul ul { display: none; position: absolute; top: 100%; background-color: rgba(47,184,228,.1); }
+
+/*top level*/
+/*nav > ul { padding-left: 35px; }*/
+nav > ul { border: 1px solid; border-color: rgb(74,90,103); }
+nav > ul > li { float: left; }
+nav > ul > li > a { padding: 10px 20px 15px 20px; width: auto; } /*padding-bottom veraendern -> 10 auf 20; toplevel passt sich an*/
