@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Medieninformatik</title>
 	<link rel="stylesheet" href="assets\css\styles.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineMax.min.js"></script>
+
 </head>
 
 <body>
@@ -41,7 +45,7 @@
 
 
 	<div id="big_grey_box"></div>
-	<p class="textcontainer" id="meta_info"><small>START</small> WINTERSEMESTER <small>DAUER</small> VOLLZEIT 6 SEMESTER <small>ZULASSUNGSFREI</small></p>
+	<p class="textcontainer" id="meta_info"><span id="meta_info_text"><small>START</small> WINTERSEMESTER <small>DAUER</small> VOLLZEIT 6 SEMESTER <small>ZULASSUNGSFREI</small></span></p>
 
 
 
@@ -63,9 +67,11 @@
 </div>
 
 
-	<img class="intro-image" id="intropic" src="assets\img\intropic.png" alt="Picture" >
+	<img class="intro-image" id="left" src="assets\img\left.png" alt="Picture" >
+	<img class="intro-image" id="top" src="assets\img\top.png" alt="Picture" >
+	<img class="intro-image" id="bottom" src="assets\img\bottom.png" alt="Picture" >
 
-
+<script src="assets\js\intro.js"></script>
 
 </body>
 </html>
