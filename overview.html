@@ -30,6 +30,22 @@
 			// initialize Data:
 			window.allModuleData = parseCsvData(mpmApp.csvData);
 			window.currentModuleData = window.allModuleData;
+			window.currentlyActiveFilters = [];
+
+			let filters = [];
+			// do we came here from a btn?
+			// read: do we have a location hash? (url#sth)
+			if (window.location.hash) {
+				if (window.location.hash === '#medienproduktion') {
+					addFilterByAnd('specialization', 'Allgemein')
+					addFilterByOr('specialization', 'Medienproduktion')
+				} 
+				if (window.location.hash === '#webAndMobile') {
+					addFilterByAnd('specialization', 'Allgemein')
+					addFilterByOr('specialization', 'Web&Mobile')
+				}
+			}
+
 			forceRerender();
 		})
 
@@ -38,11 +54,18 @@
 			window.currentModuleData.forEach((item) => {
 				$('#dataTable').append(`<tr>
 					<td>${item.thmId}</td>	
+					<td>${item.semester}</td>	
 					<td>${item.title}</td>
 					<td>${item.specialization}</td>
 					<td>${item.isMandatory}</td>
 					<td>${item.examCondition}</td>
 				</tr>`)
+			})
+
+			$('#currentFilters').html('')
+			window.currentlyActiveFilters.forEach((item) => {
+				let key = Object.keys(item)[0];
+				$('#currentFilters').append(key + ': ' + item[key] + '<br />');
 			})
 		}
 
@@ -65,9 +88,49 @@
 			return module;
 		}
 
-		filterBy = (property, value) => {
-			console.log(property)
-			console.log(value)
+		addFilterByAnd = (property, value) => {
+			let keyStr = 'filter-and-' + property;
+			let obj = {}
+			obj[keyStr] = value;
+			window.currentlyActiveFilters.push(obj)
+			let filterFn = (module) => {
+				return (module[property].trim() == value.trim())
+			}
+
+			if (property === '') {
+				filterFn = () => {return true};
+			}
+
+			let filteredModuleData = _.filter(window.currentModuleData, filterFn);
+
+			window.currentModuleData = filteredModuleData;
+			forceRerender();
+		}
+
+		hasFilter = (property) => {
+			let returnValue = false;
+			_.each(window.currentlyActiveFilters, (filter) => {
+				let filterName = Object.keys(filter)[0]
+				if(filterName.endsWith(property)) {
+					returnValue = true;
+				}
+			});
+
+			return returnValue;
+		}
+
+		addFilterByOr = (property, value) => {
+			if ((hasFilter('specialization') && !hasFilter('semester')) && property === 'semester' ||
+				window.currentlyActiveFilters.length === 0) {
+				return addFilterByAnd(property, value);
+			}
+
+			let keyStr = 'filter-or-' + property;
+			let obj = {}
+			obj[keyStr] = value;
+			window.currentlyActiveFilters.push(obj)
+
+			console.log('adding or filter');
 			let filterFn = (module) => {
 				return (module[property].trim() == value.trim())
 			}
@@ -78,7 +141,13 @@
 
 			let filteredModuleData = _.filter(window.allModuleData, filterFn);
 
-			window.currentModuleData = filteredModuleData;
+			window.currentModuleData = _.uniq(_.union(window.currentModuleData, filteredModuleData), false, (item) => {return item.thmId});
+			forceRerender();
+		}
+
+		clearFilters = () => {
+			window.currentlyActiveFilters = [];
+			window.currentModuleData = window.allModuleData;
 			forceRerender();
 		}
 	</script>
@@ -91,27 +160,28 @@
 		<div id="filter" class="test">
 			<nav>
 			<ul>
-				<li><a href="#">Alle Semester</a></li>
-				<li><a href="#">1 Sem.</a></li>
-				<li><a href="#">2 Sem.</a></li>
-				<li><a href="#">3 Sem.</a></li>
-				<li><a href="#">4 Sem.</a></li>
-				<li><a href="#">5 Sem.</a></li>
-				<li><a href="#">6 Sem.</a></li>
+				<li onclick="clearFilters()"><a href="#">Filter Entfernen</a></li>
+				<li onclick="addFilterByOr('semester', '1')"><a href="#" >1 Sem.</a></li>
+				<li onclick="addFilterByOr('semester', '2')"><a href="#">2 Sem.</a></li>
+				<li onclick="addFilterByOr('semester', '3')"><a href="#">3 Sem.</a></li>
+				<li onclick="addFilterByOr('semester', '4')"><a href="#">4 Sem.</a></li>
+				<li onclick="addFilterByOr('semester', '5')"><a href="#">5 Sem.</a></li>
+				<li onclick="addFilterByOr('semester', '6')"><a href="#">6 Sem.</a></li>
 				<li><a href="#" aria-haspopup="true">Schwerpunkt</a> <!--hover on touch durch aria attribut -->
 					<ul>
-						<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-						<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-						<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+						<li onclick="addFilterByAnd('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+						<li onclick="addFilterByAnd('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+						<li onclick="addFilterByAnd('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
 					</ul>
 				</li>
 			</ul>
 			</nav>
 		</div>
-		<button >nur pflichtmodule</button>
+		<span id="currentFilters"></span>
 		<table id="dataTable">
 			<tr id="headerRow">
 				<th>THM ID</th>
+				<th>Sem.</th>
 				<th>Titel</th>
 				<th>Schwerpunkt</th>
 				<th>Pflicht</th>
