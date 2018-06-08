@@ -122,6 +122,10 @@ small{
   margin-left: 5vh;
 }
 
+.uppercase-text{
+  text-transform: uppercase;
+}
+
 #logo_container{
   display: block;
   grid-column: 6;
