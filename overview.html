@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semesterplan</title>
 	<link rel="stylesheet" href="assets/css/overview.css">
+	<link rel="stylesheet" href="assets/css/main.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 	<script>
@@ -30,22 +31,6 @@
 			// initialize Data:
 			window.allModuleData = parseCsvData(mpmApp.csvData);
 			window.currentModuleData = window.allModuleData;
-			window.currentlyActiveFilters = [];
-
-			let filters = [];
-			// do we came here from a btn?
-			// read: do we have a location hash? (url#sth)
-			if (window.location.hash) {
-				if (window.location.hash === '#medienproduktion') {
-					addFilterByAnd('specialization', 'Allgemein')
-					addFilterByOr('specialization', 'Medienproduktion')
-				} 
-				if (window.location.hash === '#webAndMobile') {
-					addFilterByAnd('specialization', 'Allgemein')
-					addFilterByOr('specialization', 'Web&Mobile')
-				}
-			}
-
 			forceRerender();
 		})
 
@@ -54,18 +39,11 @@
 			window.currentModuleData.forEach((item) => {
 				$('#dataTable').append(`<tr>
 					<td>${item.thmId}</td>	
-					<td>${item.semester}</td>	
 					<td>${item.title}</td>
 					<td>${item.specialization}</td>
 					<td>${item.isMandatory}</td>
 					<td>${item.examCondition}</td>
 				</tr>`)
-			})
-
-			$('#currentFilters').html('')
-			window.currentlyActiveFilters.forEach((item) => {
-				let key = Object.keys(item)[0];
-				$('#currentFilters').append(key + ': ' + item[key] + '<br />');
 			})
 		}
 
@@ -88,49 +66,9 @@
 			return module;
 		}
 
-		addFilterByAnd = (property, value) => {
-			let keyStr = 'filter-and-' + property;
-			let obj = {}
-			obj[keyStr] = value;
-			window.currentlyActiveFilters.push(obj)
-			let filterFn = (module) => {
-				return (module[property].trim() == value.trim())
-			}
-
-			if (property === '') {
-				filterFn = () => {return true};
-			}
-
-			let filteredModuleData = _.filter(window.currentModuleData, filterFn);
-
-			window.currentModuleData = filteredModuleData;
-			forceRerender();
-		}
-
-		hasFilter = (property) => {
-			let returnValue = false;
-			_.each(window.currentlyActiveFilters, (filter) => {
-				let filterName = Object.keys(filter)[0]
-				if(filterName.endsWith(property)) {
-					returnValue = true;
-				}
-			});
-
-			return returnValue;
-		}
-
-		addFilterByOr = (property, value) => {
-			if ((hasFilter('specialization') && !hasFilter('semester')) && property === 'semester' ||
-				window.currentlyActiveFilters.length === 0) {
-				return addFilterByAnd(property, value);
-			}
-
-			let keyStr = 'filter-or-' + property;
-			let obj = {}
-			obj[keyStr] = value;
-			window.currentlyActiveFilters.push(obj)
-
-			console.log('adding or filter');
+		filterBy = (property, value) => {
+			console.log(property)
+			console.log(value)
 			let filterFn = (module) => {
 				return (module[property].trim() == value.trim())
 			}
@@ -141,13 +79,7 @@
 
 			let filteredModuleData = _.filter(window.allModuleData, filterFn);
 
-			window.currentModuleData = _.uniq(_.union(window.currentModuleData, filteredModuleData), false, (item) => {return item.thmId});
-			forceRerender();
-		}
-
-		clearFilters = () => {
-			window.currentlyActiveFilters = [];
-			window.currentModuleData = window.allModuleData;
+			window.currentModuleData = filteredModuleData;
 			forceRerender();
 		}
 	</script>
@@ -157,38 +89,161 @@
 		<h2>Bachelor of Science</h2>
 		<h1>Medieninformatik</h1>
 	</header>
-		<div id="filter" class="test">
+			<div id="filter" class="test">
 			<nav>
 			<ul>
-				<li onclick="clearFilters()"><a href="#">Filter Entfernen</a></li>
-				<li onclick="addFilterByOr('semester', '1')"><a href="#" >1 Sem.</a></li>
-				<li onclick="addFilterByOr('semester', '2')"><a href="#">2 Sem.</a></li>
-				<li onclick="addFilterByOr('semester', '3')"><a href="#">3 Sem.</a></li>
-				<li onclick="addFilterByOr('semester', '4')"><a href="#">4 Sem.</a></li>
-				<li onclick="addFilterByOr('semester', '5')"><a href="#">5 Sem.</a></li>
-				<li onclick="addFilterByOr('semester', '6')"><a href="#">6 Sem.</a></li>
+				<li><a href="#">Alle Semester</a></li>
+				<li><a href="#">1 Sem.</a></li>
+				<li><a href="#">2 Sem.</a></li>
+				<li><a href="#">3 Sem.</a></li>
+				<li><a href="#">4 Sem.</a></li>
+				<li><a href="#">5 Sem.</a></li>
+				<li><a href="#">6 Sem.</a></li>
+				<li><a href="#" aria-haspopup="true">Schwerpunkt</a><!-- hover on touch durch aria attribut -->
+					<ul>
+						<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+						<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+						<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+					</ul>
+				</li>
 			</ul>
 			</nav>
 		</div>
-        <div id="filter2" class="test2">
-            <nav>
-            <ul>
-	            <li onclick="addFilterByAnd('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-	            <li onclick="addFilterByAnd('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-	            <li onclick="addFilterByAnd('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
-			</ul>
-			</nav>
+		<!--	<button >nur pflichtmodule</button> -->
+
+<div id="Verpaufsplan">
+<table>
+<tbody>
+<tr>
+	<td style="border:0;"></td><td style="border:0;"></td><td style="border:0;"></td>
+	<td style="border:0;" rowspan="6" id="Entscheidung"><div class="Entscheidung">Entscheidung für einen Schwerpunkt Medienproduktion oder Web&amp;Mobile</div></td></tr>
+<tr>
+<th></th>
+<th>SEMESTER1</th>
+<th>SEMESTER2</th>
+<th>SEMESTER3</th>
+<th>SEMESTER4</th>
+<th>SEMESTER5</th>
+<th>SEMESTER6</th>
+</tr>
+<tr style="border-bottom: 2px dashed;">
+	
+	<td><div id="title" class="text-rotate">Medienproduktion</div></td>
+	<td>
+	
+		<div class="modul"><div id="title"><b>GD1 Modelierung</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+		<div class="modul"><div id="title" ><b>Audiovisuelle Medien 1</b><br>Studiotechnik<br>Studioproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	
+	</td>
+<td><div class="modul"><div id="title"><b>GD2 Shading/Rendering</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>	
+<td>
+	<div class="modul"><div id="title"><b>GD3 Animation</b></div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Audiovisuelle Medien 2</b><br>Filmtechnik<br>Filmproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	</td>
+<td rowspan="2">
+	
+	<div class="modul"><div id="title"><b>Audiovisuelle Medien 3</b><br>Outside&amp;Remote Technology<br>Outside&amp;Remote Technology</div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Medien-Projekte</b><br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Netzwerksicherheit</b><br></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div>	
+	<div class="modul"><div id="title"><b>Mobile Anwendungen 1</b><br></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>	
+	</td>
+<td rowspan="4">
+	
+	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(nicht aus eigenem Schwerpunkt)<br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(Beliebig)</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	
+	</td>
+<td rowspan="4">
+	
+	<div class="modul"><div id="title"><b>Praxisphase mit Praxisseminar</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Bachelorarbeit mit Kolloquium</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+
+	
+	</td>
+</tr>
+<tr style="border-bottom: 2px dashed;">
+<td><div id="title" class="text-rotate">Web&amp;Mobile</div></td>
+<td><div class="modul"><div id="title" ><b>Web-Programmierung 1</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+<td><div class="modul"><div id="title" ><b>Web-Programmierung 2</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+<td><div class="modul"><div id="title" ><b>Datenbanken</b></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div></td>
+
+
+
+
+</tr>
+<tr style="border-bottom: 2px dashed;">
+	
+	<td><div id="title" class="text-rotate">Informatik</div></td>
+<td><div class="modul"><div id="title" ><b>Softwareentwicklung</b><br>Einführung in die Programmierung<br>Reflexives Lernen</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+<td><div class="modul"><div id="title" ><b>Softwareentwicklung 2</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+
+<td>
+	<div class="modul"><div id="title" ><b>Softwareentwicklung<br>Projekt</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title" ><b>Theoretische Informatik und Algorithmik</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	</td>
+<td></td>
+
+
+</tr>
+<tr style="border-bottom: 2px dashed;">
+<td><div id="title" class="text-rotate">Grandlagen<br>&amp;<br>Schlüsselkompetenzen</div></td>
+<td><div class="modul"><div id="title" ><b>Mediengestaltung 1: AV</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+<td><div class="modul"><div id="title" ><b>Mediengestaltung 2: Text&amp;Bild</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title" ><b>Mathematik</b></div><a class="button" href="#modulpopup"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+
+<td><div class="modul"><div id="title" ><b>Einführung in die BWL</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
+<td>
+	<div class="modul"><div id="title" ><b>IT und Medienrecht</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title" ><b>Seminar</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+	</td>
+
+
+</tr>
+</tbody>
+</table>
+</div>
+	<!-- POPUP Infos-->
+		<div id="modulpopup" class="overlay">
+		<div class="popup">
+		
+		<div id="titel">Mathematik</div>
+		<div class="popupcontent">
+			<table>
+			<tbody>
+				
+				<tr><td>Kürzel</td><td>CrP</td><td>Semseter</td><td>Pflicht/Wahlpflicht</td><td>Prüfungsvorleistung</td><td>Prüfungsleistung</td></tr>
+				<tr><td>MIB10</td><td>6</td><td>2</td><td>Pflicht</td><td>Testat</td><td>Klausur</td></tr>
+				<tr><td colspan="6">Inhalte</td></tr>
+				<tr><td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte; 
+										Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
+								<br><br>•	Ausblick auf die angewandte Statistik
+					</td></tr>
+				<tr><td colspan="6">Angestrebte Lernergebnisse</td></tr>
+				<tr><td colspan="6">Fachliche Kompetenzen:
+									<br><br>	
+									•	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
+									<br><br>
+									•	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
+
+				</td></tr>
+				<tr><td colspan="6">Studentischer Aufwand</td></tr>
+				<tr><td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h
+
+				</td></tr>
+							
+				<br><br>
+				
+				</tbody>
+			
+			</table>
 		</div>
-		<span id="currentFilters"></span>
-		<table id="dataTable">
-			<tr id="headerRow">
-				<th>THM ID</th>
-				<th>Sem.</th>
-				<th>Titel</th>
-				<th>Schwerpunkt</th>
-				<th>Pflicht</th>
-				<th>Prüfungsvorleistung</th>
-			</tr>
-		</table>
+			<a class="close" href="#">&times;</a>
+	</div>
+</div>	
+	<!-- POPUP Infos-->
+
   </body>
 </html>
