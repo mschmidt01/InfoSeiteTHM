@@ -99,7 +99,9 @@ a{  color: #333;  text-decoration: none;  }
   visibility: visible;
   opacity: 1;
 }
-
+.modul-back{
+  visibility: hidden;
+}
 .popup {
   margin: 70px auto;
   padding: 60px;
@@ -107,8 +109,11 @@ a{  color: #333;  text-decoration: none;  }
   border-radius: 5px;
   width: 70vw;
   height: 70vh;
-  position: relative;
-  transition: all 5s ease-in-out;
+  position: absolute;
+  top:0;
+  left:0;
+  /*transition: all 5s ease-in-out;*/
+  visibility: hidden;
 }
 
 #titel {

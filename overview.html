@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TimelineMax.min.js"></script>
 	<script>
 	let mpmApp = {}
 	</script>
@@ -52,7 +54,7 @@
 			let linesParsed = lines.map(parseCsvLine)
 
 			return linesParsed;
-		} 
+		}
 
 		parseCsvLine = (lineString) => {
 			let module = {}
@@ -127,41 +129,115 @@
 <th>SEMESTER6</th>
 </tr>
 <tr style="border-bottom: 2px dashed;">
-	
+
 	<td><div id="title" class="text-rotate">Medienproduktion</div></td>
 	<td>
-	
-		<div class="modul"><div id="title"><b>GD1 Modelierung</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
+
+        <div class="modul"><div class="modul-front"><div id="title"><b>GD1 Modelierung</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></div>
+            <div class="popup">
+
+                <div id="titel">Mathematik</div>
+                <div class="popupcontent">
+                    <table>
+                        <tbody>
+
+                        <tr><td>Kürzel</td><td>CrP</td><td>Semseter</td><td>Pflicht/Wahlpflicht</td><td>Prüfungsvorleistung</td><td>Prüfungsleistung</td></tr>
+                        <tr><td>MIB10</td><td>6</td><td>2</td><td>Pflicht</td><td>Testat</td><td>Klausur</td></tr>
+                        <tr><td colspan="6">Inhalte</td></tr>
+                        <tr><td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte;
+                            Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
+                            <br><br>•	Ausblick auf die angewandte Statistik
+                        </td></tr>
+                        <tr><td colspan="6">Angestrebte Lernergebnisse</td></tr>
+                        <tr><td colspan="6">Fachliche Kompetenzen:
+                            <br><br>
+                            •	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
+                            <br><br>
+                            •	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
+
+                        </td></tr>
+                        <tr><td colspan="6">Studentischer Aufwand</td></tr>
+                        <tr><td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h
+
+                        </td></tr>
+
+                        <br><br>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <a class="close" href="#">&times;</a>
+            </div>
+            </a></div>
+
+
 		<div class="modul"><div id="title" ><b>Audiovisuelle Medien 1</b><br>Studiotechnik<br>Studioproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-	
+
 	</td>
-<td><div class="modul"><div id="title"><b>GD2 Shading/Rendering</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>	
+<td><div class="modul"><div id="title"><b>GD2 Shading/Rendering</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
 <td>
 	<div class="modul"><div id="title"><b>GD3 Animation</b></div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Audiovisuelle Medien 2</b><br>Filmtechnik<br>Filmproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
 	</td>
 <td rowspan="2">
-	
+
 	<div class="modul"><div id="title"><b>Audiovisuelle Medien 3</b><br>Outside&amp;Remote Technology<br>Outside&amp;Remote Technology</div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Medien-Projekte</b><br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-	<div class="modul"><div id="title"><b>Netzwerksicherheit</b><br></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div>	
-	<div class="modul"><div id="title"><b>Mobile Anwendungen 1</b><br></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>	
+	<div class="modul"><div id="title"><b>Netzwerksicherheit</b><br></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div>
+	<div class="modul"><div id="title"><b>Mobile Anwendungen 1</b><br></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
 	</td>
 <td rowspan="4">
-	
-	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
+
+    <div class="modul"><div class="modul-front"><div id="title"><b>GD1 Modelierung</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></div>
+        <div class="popup">
+
+            <div id="titel">Mathematik</div>
+            <div class="popupcontent">
+                <table>
+                    <tbody>
+
+                    <tr><td>Kürzel</td><td>CrP</td><td>Semseter</td><td>Pflicht/Wahlpflicht</td><td>Prüfungsvorleistung</td><td>Prüfungsleistung</td></tr>
+                    <tr><td>MIB10</td><td>6</td><td>2</td><td>Pflicht</td><td>Testat</td><td>Klausur</td></tr>
+                    <tr><td colspan="6">Inhalte</td></tr>
+                    <tr><td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte;
+                        Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
+                        <br><br>•	Ausblick auf die angewandte Statistik
+                    </td></tr>
+                    <tr><td colspan="6">Angestrebte Lernergebnisse</td></tr>
+                    <tr><td colspan="6">Fachliche Kompetenzen:
+                        <br><br>
+                        •	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
+                        <br><br>
+                        •	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
+
+                    </td></tr>
+                    <tr><td colspan="6">Studentischer Aufwand</td></tr>
+                    <tr><td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h
+
+                    </td></tr>
+
+                    <br><br>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <a class="close" href="#">&times;</a>
+        </div>
+        </a></div>
 	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(nicht aus eigenem Schwerpunkt)<br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(Beliebig)</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-	
+
 	</td>
 <td rowspan="4">
-	
+
 	<div class="modul"><div id="title"><b>Praxisphase mit Praxisseminar</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
 	<div class="modul"><div id="title"><b>Bachelorarbeit mit Kolloquium</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
 
-	
+
 	</td>
 </tr>
 <tr style="border-bottom: 2px dashed;">
@@ -175,7 +251,7 @@
 
 </tr>
 <tr style="border-bottom: 2px dashed;">
-	
+
 	<td><div id="title" class="text-rotate">Informatik</div></td>
 <td><div class="modul"><div id="title" ><b>Softwareentwicklung</b><br>Einführung in die Programmierung<br>Reflexives Lernen</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
 <td><div class="modul"><div id="title" ><b>Softwareentwicklung 2</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
@@ -207,43 +283,11 @@
 </div>
 	<!-- POPUP Infos-->
 		<div id="modulpopup" class="overlay">
-		<div class="popup">
-		
-		<div id="titel">Mathematik</div>
-		<div class="popupcontent">
-			<table>
-			<tbody>
-				
-				<tr><td>Kürzel</td><td>CrP</td><td>Semseter</td><td>Pflicht/Wahlpflicht</td><td>Prüfungsvorleistung</td><td>Prüfungsleistung</td></tr>
-				<tr><td>MIB10</td><td>6</td><td>2</td><td>Pflicht</td><td>Testat</td><td>Klausur</td></tr>
-				<tr><td colspan="6">Inhalte</td></tr>
-				<tr><td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte; 
-										Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
-								<br><br>•	Ausblick auf die angewandte Statistik
-					</td></tr>
-				<tr><td colspan="6">Angestrebte Lernergebnisse</td></tr>
-				<tr><td colspan="6">Fachliche Kompetenzen:
-									<br><br>	
-									•	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
-									<br><br>
-									•	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
 
-				</td></tr>
-				<tr><td colspan="6">Studentischer Aufwand</td></tr>
-				<tr><td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h
-
-				</td></tr>
-							
-				<br><br>
-				
-				</tbody>
-			
-			</table>
-		</div>
-			<a class="close" href="#">&times;</a>
-	</div>
-</div>	
+</div>
 	<!-- POPUP Infos-->
-
+	<!-- Animations-->
+		<script src="assets\js\moduleAnimations.js"></script>#
+	<!-- Animations-->
   </body>
 </html>
