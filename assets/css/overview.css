@@ -110,6 +110,9 @@ header{ width: 99vw; height: 15vh; display: flex; }
   box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
   margin: 5px;
   background: #ffffff;
+  z-index: 4;
+  position:relative;
+  visibility: hidden;
 }
 
 #title {  color: #333;  text-align: center;   margin: .51vw;   }
@@ -118,7 +121,7 @@ header{ width: 99vw; height: 15vh; display: flex; }
   padding: 5px 0;
   font-family: DINl, arial, sans-serif;
   color:#fff;
-  text-align: center; 
+  text-align: center;
   border-bottom-left-radius: 0.5vw;
   border-bottom-right-radius: 0.5vw;
 }
@@ -145,19 +148,29 @@ header{ width: 99vw; height: 15vh; display: flex; }
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 200ms;
   visibility: hidden;
+  z-index:9;
   opacity: 0;
 }
 
 .overlay:target {  visibility: visible;  opacity: 1; }
 
 .popup {
-  margin: 70px auto;
+ /*margin: 70px auto;*/
   padding: 60px;
-  background: #fff;
-  border-radius: 5px;
   width: 70vw;
   height: 70vh;
-  position: relative;
+  position: absolute;
+  top:0;
+  left:0;
+  /*transition: all 5s ease-in-out;*/
+  visibility: hidden;
+  border: .05vw solid #9ca5aa;
+  border-radius: 0.5vw;
+  -webkit-box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
+  box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
+  background: #ffffff;
+  z-index: 10;
 }
 
 #titel {
@@ -172,7 +185,7 @@ header{ width: 99vw; height: 15vh; display: flex; }
   position: absolute;
   bottom: 0;
   left: 50%;
-  transition: all 10ms;
+  /*transition: all 10ms;*/
   font-size: 5vw;
   font-weight: bold;
   text-decoration: none;
@@ -194,4 +207,7 @@ header{ width: 99vw; height: 15vh; display: flex; }
 
 /*Popup Fenster ENDE*/
 
+.modul-back{
+  visibility: hidden;
+}
 
