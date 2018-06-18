@@ -29,22 +29,86 @@
 		}
 		$(document).ready(function(ev) {
 			// initialize Data:
-			window.allModuleData = parseCsvData(mpmApp.csvData);
-			window.currentModuleData = window.allModuleData;
+			var csvArr = parseCsvData(mpmApp.csvData);
+            var mediaModules = [];
+            var webmobileModules = [];
+            var generalModules = [];
+
+				for(var i = 0; i< csvArr.length; i++){
+				  if(csvArr[i].specialization === "Allgemein"){
+                      generalModules.push(csvArr[i]);
+				  }
+                    if(csvArr[i].specialization === "Web&Mobile"){
+                        webmobileModules.push(csvArr[i]);
+                    }
+                    if(csvArr[i].specialization === "Medienproduktion"){
+                        mediaModules.push(csvArr[i]);
+                    }
+                }
+
+            sortBySemster = function(a, b) {
+                return a.semester - b.semester;
+            };
+
+            mediaModules.sort(sortBySemster);
+            webmobileModules.sort(sortBySemster);
+            generalModules.sort(sortBySemster);
+
+			window.mediaModules = mediaModules;
+            window.webmobileModules = webmobileModules;
+            window.generalModules = generalModules;
+
 			forceRerender();
 		})
 
 		forceRerender = () => {
+
 			$('#dataTable tr:not(#headerRow)').remove();
-			window.currentModuleData.forEach((item) => {
-				$('#dataTable').append(`<tr>
-					<td>${item.thmId}</td>	
-					<td>${item.title}</td>
-					<td>${item.specialization}</td>
-					<td>${item.isMandatory}</td>
-					<td>${item.examCondition}</td>
-				</tr>`)
-			})
+            // Medienproduktion
+			var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
+
+			for(var i = 1; i<7 ; i++){
+                mediaRow+= '<td>';
+                window.mediaModules.forEach((item) => {
+                    if(parseInt(item.semester) == i){
+                        mediaRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
+                    }
+                })
+                mediaRow += '</td>';
+			}
+			mediaRow +='</tr>';
+            $('#dataTable tr:last').after(mediaRow);
+
+			// Web&Mobile
+            var webmobileRow = '<tr><td><div id="title" class="text-rotate">Web&Mobile</div></td>';
+
+            for(var i = 1; i<7 ; i++){
+                webmobileRow+= '<td>';
+                window.webmobileModules.forEach((item) => {
+                    if(parseInt(item.semester) == i){
+                        webmobileRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
+                    }
+                })
+                webmobileRow += '</td>';
+            }
+            webmobileRow +='</tr>';
+            $('#dataTable tr:last').after(webmobileRow);
+
+			// Informatik
+            var generalRow = '<tr><td><div id="title" class="text-rotate">Informatik</div></td>';
+
+            for(var i = 1; i<7 ; i++){
+                generalRow+= '<td>';
+                window.generalModules.forEach((item) => {
+                    if(parseInt(item.semester) == i){
+                        generalRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
+                    }
+                })
+                generalRow += '</td>';
+            }
+            generalRow +='</tr>';
+            $('#dataTable tr:last').after(generalRow);
+
 		}
 
 		parseCsvData = (dataString) => {
@@ -83,6 +147,7 @@
 			forceRerender();
 		}
 	</script>
+
   </head>
   <body>
 		<header>
@@ -113,9 +178,9 @@
 
 		<div id="Verlaufsplan" class="Verpaufsplan">
 			
-			<table>
+			<table id="dataTable">
 				<tbody>
-					<tr>
+					<tr id="headerRow">
 					<th></th>	
 					<th><p class="semEven">SEMESTER1</p></th>
 					<th><p class="semOdd">SEMESTER2</p></th>
@@ -125,86 +190,7 @@
 					<th><p class="semEven">SEMESTER5</p></th>
 					<th><p class="semOdd">SEMESTER6</p></th>
 					</tr>
-					<tr>
-						
-						<td><div id="title" class="text-rotate">Medienproduktion</div></td>
-						<td>
 
-                            <div class="modul animation">
-								<div id="title"><b>GD1 Modelierung</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div>
-
-                                </a></div>
-
-                            <div class="modul"><div id="title" ><b>Audiovisuelle Medien 1</b><br>Studiotechnik<br>Studioproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						
-						</td>
-					<td><div class="modul"><div id="title"><b>GD2 Shading/Rendering</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>	
-					<td>
-						<div class="modul"><div id="title"><b>GD3 Animation</b></div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Audiovisuelle Medien 2</b><br>Filmtechnik<br>Filmproduktion</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						</td>
-					<td rowspan="2">
-						
-						<div class="modul"><div id="title"><b>Audiovisuelle Medien 3</b><br>Outside&amp;Remote Technology<br>Outside&amp;Remote Technology</div><a href="#"><div id="MP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Medien-Projekte</b><br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Netzwerksicherheit</b><br></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div>	
-						<div class="modul"><div id="title"><b>Mobile Anwendungen 1</b><br></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>	
-						</td>
-					<td rowspan="4">
-						
-						<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(aus eigenem Schwerpunkt)</div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(nicht aus eigenem Schwerpunkt)<br></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Wahlpflichtfach</b><br>(Beliebig)</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						
-						</td>
-					<td rowspan="4">
-						
-						<div class="modul"><div id="title"><b>Praxisphase mit Praxisseminar</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title"><b>Bachelorarbeit mit Kolloquium</b></div><a href="#"><div id="WMP">Modulbeschreibung</div></a></div>
-
-						
-						</td>
-					</tr>
-					<tr style="border-bottom: 2px dashed;">
-					<td><div id="title" class="text-rotate">Web&amp;Mobile</div></td>
-					<td><div class="modul"><div id="title" ><b>Web-Programmierung 1</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-					<td><div class="modul"><div id="title" ><b>Web-Programmierung 2</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-					<td><div class="modul"><div id="title" ><b>Datenbanken</b></div><a href="#"><div id="WM">Modulbeschreibung</div></a></div></td>
-
-
-
-
-					</tr>
-					<tr style="border-bottom: 2px dashed;">
-						
-						<td><div id="title" class="text-rotate">Informatik</div></td>
-					<td><div class="modul"><div id="title" ><b>Softwareentwicklung</b><br>Einführung in die Programmierung<br>Reflexives Lernen</div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-					<td><div class="modul"><div id="title" ><b>Softwareentwicklung 2</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-
-					<td>
-						<div class="modul"><div id="title" ><b>Softwareentwicklung<br>Projekt</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title" ><b>Theoretische Informatik und Algorithmik</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						</td>
-					<td></td>
-
-
-					</tr>
-					<tr style="border-bottom: 2px dashed;">
-					<td><div id="title" class="text-rotate">Grandlagen<br>&amp;<br>Schlüsselkompetenzen</div></td>
-					<td><div class="modul"><div id="title" ><b>Mediengestaltung 1: AV</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-					<td><div class="modul"><div id="title" ><b>Mediengestaltung 2: Text&amp;Bild</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title" ><b>Mathematik</b></div><a class="button" href="#modulpopup"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-
-					<td><div class="modul"><div id="title" ><b>Einführung in die BWL</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></td>
-					<td>
-						<div class="modul"><div id="title" ><b>IT und Medienrecht</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						<div class="modul"><div id="title" ><b>Seminar</b></div><a href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>
-						</td>
-
-
-					</tr>
 				</tbody>
 			</table>
 		</div>	  
@@ -275,6 +261,6 @@
 	<div id="modulpopup" class="overlay">
 	</div>	
 	<!-- POPUP Infos-->
-        <script src="assets\js\moduleAnimations.js"></script>
+		<script src="assets\js\moduleAnimations.js"></script>
   </body>
 </html>

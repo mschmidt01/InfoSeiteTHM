@@ -1,5 +1,7 @@
+$(document).ready(function() {
 // Module-overview fade in Animation
 modules = $(".modul");
+console.log(modules);
 sortByX = function(a, b) {
     return a.getBoundingClientRect().left - b.getBoundingClientRect().left
 };
@@ -71,4 +73,5 @@ $(".modul").each(function() {
     });
 
 
+});
 });
