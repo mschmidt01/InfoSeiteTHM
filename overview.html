@@ -95,7 +95,7 @@
             $('#dataTable tr:last').after(webmobileRow);
 
 			// Informatik
-            var generalRow = '<tr><td><div id="title" class="text-rotate">Informatik</div></td>';
+            var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
 
             for(var i = 1; i<7 ; i++){
                 generalRow+= '<td>';
@@ -155,26 +155,27 @@
 		<div class="logoimg"><img src="assets/img/Logo.png"></div>	
 		</header>
 	  
-		<div class="filter">
-					<nav>
-						<ul>
-							<li><a href="#">Alle Semester</a></li>
-							<li><a href="#">1 Sem.</a></li>
-							<li><a href="#">2 Sem.</a></li>
-							<li><a href="#">3 Sem.</a></li>
-							<li><a href="#">4 Sem.</a></li>
-							<li><a href="#">5 Sem.</a></li>
-							<li><a href="#">6 Sem.</a></li>
-							<li><a href="#" aria-haspopup="true">Schwerpunkt</a><!-- hover on touch durch aria attribut -->
-								<ul>
-									<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-									<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-									<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-			</div>	
+		<div id="filter" class="test">
+			<nav>
+			<ul>
+				<li><a href="#">Alle Semester</a></li>
+				<li><a href="#">1 Sem.</a></li>
+				<li><a href="#">2 Sem.</a></li>
+				<li><a href="#">3 Sem.</a></li>
+				<li><a href="#">4 Sem.</a></li>
+				<li><a href="#">5 Sem.</a></li>
+				<li><a href="#">6 Sem.</a></li>
+            </ul>
+            </nav>
+        
+            <nav>
+            <ul>
+				<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+				<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+				<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+			</ul>
+			</nav>
+		</div>
 
 		<div id="Verlaufsplan" class="Verpaufsplan">
 			
