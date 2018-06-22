@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semesterplan</title>
 	<link rel="stylesheet" href="assets/css/overview.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="assets/css/modal.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 	<script>
@@ -150,6 +151,27 @@
 
   </head>
   <body>
+		<button data-modal-open="medienproduktion" style="z-index:50">medienproduktion zusatzinfos</button>
+		<button data-modal-open="web-n-mobile" style="z-index:50">web & mobile zusatzinfos</button>
+		<button data-modal-open="gd" style="z-index:50">gd zusatzinfos</button>
+		<div data-modal="medienproduktion" class="modal">
+			<div class="modal-content">
+			  <span class="close" data-modal-close="medienproduktion">x</span>
+			  <p>Lorem ipsum dolor sit amet.</p>
+			</div>
+		</div>
+		<div data-modal="web-n-mobile" class="modal">
+			<div class="modal-content">
+			  <span class="close" data-modal-close="web-n-mobile">x</span>
+			  <p>wm kram</p>
+			</div>
+		</div>
+		<div data-modal="gd" class="modal">
+			<div class="modal-content">
+			  <span class="close" data-modal-close="gd">x</span>
+			  <p>gd zeug</p>
+			</div>
+		</div>
 		<header>
 		<div class="titelheader"><h2>BACHELOR OF SCIENCE</h2><h1>Medieninformatik</h1></div>
 		<div class="logoimg"><img src="assets/img/Logo.png"></div>	
@@ -261,6 +283,7 @@
 	<div id="modulpopup" class="overlay">
 	</div>	
 	<!-- POPUP Infos-->
-		<script src="assets\js\moduleAnimations.js"></script>
+	<script src="assets\js\moduleAnimations.js"></script>
+	<script src="assets\js\modal.js"></script>
   </body>
 </html>
