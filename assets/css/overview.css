@@ -11,7 +11,7 @@ a{  color: #333;  text-decoration: none;  }
 
 header{ width: 99vw; height: 15vh; display: flex; }
 
-.filter{ width: 99.1vw; height: 5vh; font-size: 0.8vw; }
+/*.filter{ width: 99.1vw; height: 5vh; font-size: 0.8vw; }*/
 
 #Verlaufsplan{ font-size: 0.7vw; width: 99vw; height: 80vh; overflow-x: scroll; overflow-y: hidden;  }
 
@@ -46,28 +46,30 @@ header{ width: 99vw; height: 15vh; display: flex; }
 
 /*Filter*/
 
- nav { position: relative; padding-left: 10vw; padding-top: 1vh; padding-bottom: 2vh; }
+.filter nav { position: relative; padding-left: 10vw; padding-top: 1vh; padding-bottom: 2vh; }
 
- nav ul { list-style: none; margin: 0; /*border: 1px solid; border-color: rgb(74,90,103);*/ padding: 0; }
+.filter nav ul { list-style: none; margin: 0; /*border: 1px solid; border-color: rgb(74,90,103);*/ padding: 0; }
 
- nav ul::after { content: ''; display: block; clear: both; } /*creates pseudo element*/
+.filter nav ul::after { content: ''; display: block; clear: both; } /*creates pseudo element*/
 
- nav ul li:hover { background-color: rgba(47,184,228,.5)} /*beim untermenue bleibt hover bestehen*/
+.filter nav ul li:hover { background-color: rgba(47,184,228,.5)} /*beim untermenue bleibt hover bestehen*/
 
- nav ul li:hover > ul { display: block;} /*none wird mit block ersetzt, wenn hover*/
+.filter nav ul li:hover > ul { display: block;} /*none wird mit block ersetzt, wenn hover*/
 
- nav ul li a { display: inline-block; color: rgb(57,70,81); font-size: .8em; font-family: DINl, Aria, Sans-serif; letter-spacing: 0.1em; padding: 0.7vw; text-decoration: none; width: 125px; }
+.filter nav ul li a { display: inline-block; color: rgb(57,70,81); font-size: .8em; font-family: DINl, Aria, Sans-serif; letter-spacing: 0.1em; padding: 0.7vw; text-decoration: none; width: 125px; }
 
- nav ul li a:hover { background-color: rgb(47,184,228); color: #FFFF; }
+.filter nav ul li a:hover { background-color: rgb(47,184,228); color: #FFFF; }
 
- nav ul ul { display: none; position: absolute; top: 100%; background-color: rgba(47,184,228,.1); }
+.filter nav ul ul { display: none; position: absolute; top: 100%; background-color: rgba(47,184,228,.1); }
 
 /*top level*/
 /*.filter nav > ul { padding-left: 35px; }*/
- nav > ul { border: 1px solid; border-color: rgb(74,90,103); }
+.filter nav > ul { border: 1px solid; border-color: rgb(74,90,103); }
 
- nav > ul > li { float: left; }
- nav > ul > li > a { padding: 10px 20px 15px 20px; width: auto; } /*padding-bottom veraendern -> 10 auf 20; toplevel passt sich an*/
+.filter nav > ul > li { float: left; }
+.filter nav > ul > li > a { padding: 10px 20px 15px 20px; width: auto; } /*padding-bottom veraendern -> 10 auf 20; toplevel passt sich an*/
+
+/*Filteranimation*/
 
 /*Filter ENDE*/
 
