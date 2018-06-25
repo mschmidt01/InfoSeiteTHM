@@ -10,7 +10,9 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 	<script>
+	let mpmApp = {}
 	</script>
+	<script type="text/javascript" src="assets/csv/data.js"></script>
 	<script type="text/javascript">
 		window.csvDefinition = {
 			0: 'id',
@@ -27,40 +29,37 @@
 			11: 'dependsOn'
 		}
 		$(document).ready(function(ev) {
-			// fetch CSV data via AJAX:
-			$.get('/assets/csv/NeuePO_FINAL.csv', (data) => {
-				var csvArr = parseCsvData(data);
-				console.log(csvArr);
-	            var mediaModules = [];
-	            var webmobileModules = [];
-	            var generalModules = [];
+			// initialize Data:
+			var csvArr = parseCsvData(mpmApp.csvData);
+            var mediaModules = [];
+            var webmobileModules = [];
+            var generalModules = [];
 
-					for(var i = 0; i< csvArr.length; i++){
-					  if(csvArr[i].specialization === "Allgemein"){
-	                      generalModules.push(csvArr[i]);
-					  }
-	                    if(csvArr[i].specialization === "Web&Mobile"){
-	                        webmobileModules.push(csvArr[i]);
-	                    }
-	                    if(csvArr[i].specialization === "Medienproduktion"){
-	                        mediaModules.push(csvArr[i]);
-	                    }
-	                }
+				for(var i = 0; i< csvArr.length; i++){
+				  if(csvArr[i].specialization === "Allgemein"){
+                      generalModules.push(csvArr[i]);
+				  }
+                    if(csvArr[i].specialization === "Web&Mobile"){
+                        webmobileModules.push(csvArr[i]);
+                    }
+                    if(csvArr[i].specialization === "Medienproduktion"){
+                        mediaModules.push(csvArr[i]);
+                    }
+                }
 
-	            sortBySemster = function(a, b) {
-	                return a.semester - b.semester;
-	            };
+            sortBySemster = function(a, b) {
+                return a.semester - b.semester;
+            };
 
-	            mediaModules.sort(sortBySemster);
-	            webmobileModules.sort(sortBySemster);
-	            generalModules.sort(sortBySemster);
+            mediaModules.sort(sortBySemster);
+            webmobileModules.sort(sortBySemster);
+            generalModules.sort(sortBySemster);
 
-				window.mediaModules = mediaModules;
-	            window.webmobileModules = webmobileModules;
-	            window.generalModules = generalModules;
+			window.mediaModules = mediaModules;
+            window.webmobileModules = webmobileModules;
+            window.generalModules = generalModules;
 
-				forceRerender();
-			})
+			forceRerender();
 		})
 
 		forceRerender = () => {
@@ -97,7 +96,7 @@
             $('#dataTable tr:last').after(webmobileRow);
 
 			// Informatik
-            var generalRow = '<tr><td><div id="title" class="text-rotate">Informatik</div></td>';
+            var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
 
             for(var i = 1; i<7 ; i++){
                 generalRow+= '<td>';
@@ -122,7 +121,7 @@
 
 		parseCsvLine = (lineString) => {
 			let module = {}
-			let objectValues = lineString.split('铁');
+			let objectValues = lineString.split(',');
 			objectValues.forEach((value, index, array) => {
 				if (window.csvDefinition[index]) {
 					module[window.csvDefinition[index]] = value;
@@ -177,30 +176,37 @@
 		<div class="titelheader"><h2>BACHELOR OF SCIENCE</h2><h1>Medieninformatik</h1></div>
 		<div class="logoimg"><img src="assets/img/Logo.png"></div>	
 		</header>
-	  
-		<div class="filter">
-					<nav>
-						<ul>
-							<li><a href="#">Alle Semester</a></li>
-							<li><a href="#">1 Sem.</a></li>
-							<li><a href="#">2 Sem.</a></li>
-							<li><a href="#">3 Sem.</a></li>
-							<li><a href="#">4 Sem.</a></li>
-							<li><a href="#">5 Sem.</a></li>
-							<li><a href="#">6 Sem.</a></li>
-							<li><a href="#" aria-haspopup="true">Schwerpunkt</a><!-- hover on touch durch aria attribut -->
-								<ul>
-									<li onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-									<li onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-									<li onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-			</div>	
+	
+        <div id="filter" class="filter">
+			<nav>
+			<ul>
+				<li id="filter0" class="btn0"><a href="#">Alle Semester</a></li>
+				<li id="filter1" class="btn1"><a href="#">1 Sem.</a></li>
+				<li id="filter2" class="btn2"><a href="#">2 Sem.</a></li>
+				<li id="filter3" class="btn3"><a href="#">3 Sem.</a></li>
+				<li id="filter4" class="btn4"><a href="#">4 Sem.</a></li>
+				<li id="filter5" class="btn5"><a href="#">5 Sem.</a></li>
+				<li id="filter6" class="btn6"><a href="#">6 Sem.</a></li>
+            </ul>
+            </nav>
+        
+            <nav>
+            <ul>
+				<li id="filter7" class="spez0" onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+				<li id="filter8" class="spez1" onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+				<li id="filter9" class="spez2" onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+			</ul>
+			</nav>
+		</div>
+      
+      <script src="assets\js\Filteranimation.js"></script>
+      
+      <script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+      </script>
+
 
 		<div id="Verlaufsplan" class="Verlaufsplan">
-			
 			<table id="dataTable">
 				<tbody>
 					<tr id="headerRow">
@@ -213,7 +219,6 @@
 					<th><p class="semEven">SEMESTER5</p></th>
 					<th><p class="semOdd">SEMESTER6</p></th>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>	  

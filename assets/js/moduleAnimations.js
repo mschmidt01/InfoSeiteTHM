@@ -1,5 +1,9 @@
 $(document).ready(function() {
-// Module-overview fade in Animation
+// @TODO fix this to work with delegated events as to also catch events for dynamically created modules…
+// use this as a starting point:
+$('body').on('click', '.Verlaufsplan', function(e) {
+    alert('open module description');
+})
 modules = $(".modul");
 console.log(modules);
 sortByX = function(a, b) {
