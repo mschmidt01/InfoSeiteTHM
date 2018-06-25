@@ -26,7 +26,9 @@
 			8: 'precursor',
 			9: 'successor',
 			10: 'examCondition',
-			11: 'dependsOn'
+			11: 'dependsOn',
+			12: 'objective',
+			13: 'contents'
 		}
 		$(document).ready(function(ev) {
 			// fetch CSV data via AJAX:
@@ -127,7 +129,9 @@
 			let objectValues = lineString.split('铁');
 			objectValues.forEach((value, index, array) => {
 				if (window.csvDefinition[index]) {
-					module[window.csvDefinition[index]] = value;
+					let valueRemoveDoubleBreaks = value.replace(/药药/g, '药');
+					let valueConvertedLineBreaks = valueRemoveDoubleBreaks.replace(/药/g, '<br>')
+					module[window.csvDefinition[index]] = valueConvertedLineBreaks;
 				}
 			})
 
@@ -263,37 +267,24 @@
 						<td id="module-isMandatory">Pflicht</td>
 						<td id="module-examCondition">Testat</td>
 					</tr>
+
 					<tr>
 						<td colspan="6">Inhalte</td>
 					</tr>
-
 					<tr>
-						<td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte;
-							Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
-							<br><br>•	Ausblick auf die angewandte Statistik
+						<td colspan="6">
+							<p id="module-contents"></p>
 						</td>
 					</tr>
+
 					<tr>
 						<td colspan="6">Angestrebte Lernergebnisse</td>
 					</tr>
 					<tr>
-						<td colspan="6">Fachliche Kompetenzen:
-							<br><br>
-							•	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
-							<br><br>
-							•	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
-
+						<td colspan="6">
+							<p id="module-objective"></p>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="6">Studentischer Aufwand</td>
-					</tr>
-					<tr>
-						<td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h</td>
-					</tr>
-
-					<br><br>
-
 					</tbody>
 				</table>
 			</div>
