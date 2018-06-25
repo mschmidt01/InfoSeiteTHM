@@ -10,9 +10,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 	<script>
-	let mpmApp = {}
 	</script>
-	<script type="text/javascript" src="assets/csv/data.js"></script>
 	<script type="text/javascript">
 		window.csvDefinition = {
 			0: 'id',
@@ -29,37 +27,40 @@
 			11: 'dependsOn'
 		}
 		$(document).ready(function(ev) {
-			// initialize Data:
-			var csvArr = parseCsvData(mpmApp.csvData);
-            var mediaModules = [];
-            var webmobileModules = [];
-            var generalModules = [];
+			// fetch CSV data via AJAX:
+			$.get('/assets/csv/NeuePO_FINAL.csv', (data) => {
+				var csvArr = parseCsvData(data);
+				console.log(csvArr);
+	            var mediaModules = [];
+	            var webmobileModules = [];
+	            var generalModules = [];
 
-				for(var i = 0; i< csvArr.length; i++){
-				  if(csvArr[i].specialization === "Allgemein"){
-                      generalModules.push(csvArr[i]);
-				  }
-                    if(csvArr[i].specialization === "Web&Mobile"){
-                        webmobileModules.push(csvArr[i]);
-                    }
-                    if(csvArr[i].specialization === "Medienproduktion"){
-                        mediaModules.push(csvArr[i]);
-                    }
-                }
+					for(var i = 0; i< csvArr.length; i++){
+					  if(csvArr[i].specialization === "Allgemein"){
+	                      generalModules.push(csvArr[i]);
+					  }
+	                    if(csvArr[i].specialization === "Web&Mobile"){
+	                        webmobileModules.push(csvArr[i]);
+	                    }
+	                    if(csvArr[i].specialization === "Medienproduktion"){
+	                        mediaModules.push(csvArr[i]);
+	                    }
+	                }
 
-            sortBySemster = function(a, b) {
-                return a.semester - b.semester;
-            };
+	            sortBySemster = function(a, b) {
+	                return a.semester - b.semester;
+	            };
 
-            mediaModules.sort(sortBySemster);
-            webmobileModules.sort(sortBySemster);
-            generalModules.sort(sortBySemster);
+	            mediaModules.sort(sortBySemster);
+	            webmobileModules.sort(sortBySemster);
+	            generalModules.sort(sortBySemster);
 
-			window.mediaModules = mediaModules;
-            window.webmobileModules = webmobileModules;
-            window.generalModules = generalModules;
+				window.mediaModules = mediaModules;
+	            window.webmobileModules = webmobileModules;
+	            window.generalModules = generalModules;
 
-			forceRerender();
+				forceRerender();
+			})
 		})
 
 		forceRerender = () => {
@@ -121,7 +122,7 @@
 
 		parseCsvLine = (lineString) => {
 			let module = {}
-			let objectValues = lineString.split(',');
+			let objectValues = lineString.split('铁');
 			objectValues.forEach((value, index, array) => {
 				if (window.csvDefinition[index]) {
 					module[window.csvDefinition[index]] = value;
