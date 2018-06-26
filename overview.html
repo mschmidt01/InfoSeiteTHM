@@ -33,7 +33,7 @@
 		}
 		$(document).ready(function(ev) {
 			// fetch CSV data via AJAX:
-			$.get('/assets/csv/NeuePO_FINAL.csv', (data) => {
+			$.get('./assets/csv/NeuePO_FINAL.csv', (data) => {
 				// initialize Data:
 				var csvArr = parseCsvData(data);
 	            var mediaModules = [];
