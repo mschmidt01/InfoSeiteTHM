@@ -26,44 +26,50 @@
 			8: 'precursor',
 			9: 'successor',
 			10: 'examCondition',
-			11: 'dependsOn'
+			11: 'examType',
+			12: 'dependsOn',
+			13: 'objective',
+			14: 'contents'
 		}
 		$(document).ready(function(ev) {
-			// initialize Data:
-			var csvArr = parseCsvData(mpmApp.csvData);
-            var mediaModules = [];
-            var webmobileModules = [];
-            var generalModules = [];
+			// fetch CSV data via AJAX:
+			$.get('/assets/csv/NeuePO_FINAL.csv', (data) => {
+				// initialize Data:
+				var csvArr = parseCsvData(data);
+	            var mediaModules = [];
+	            var webmobileModules = [];
+	            var generalModules = [];
 
-				for(var i = 0; i< csvArr.length; i++){
-				  if(csvArr[i].specialization === "Allgemein"){
-                      generalModules.push(csvArr[i]);
-				  }
-                    if(csvArr[i].specialization === "Web&Mobile"){
-                        webmobileModules.push(csvArr[i]);
-                    }
-                    if(csvArr[i].specialization === "Medienproduktion"){
-                        mediaModules.push(csvArr[i]);
-                    }
-                }
+					for(var i = 0; i< csvArr.length; i++){
+					  if(csvArr[i].specialization === "Allgemein"){
+	                      generalModules.push(csvArr[i]);
+					  }
+	                    if(csvArr[i].specialization === "Web&Mobile"){
+	                        webmobileModules.push(csvArr[i]);
+	                    }
+	                    if(csvArr[i].specialization === "Medienproduktion"){
+	                        mediaModules.push(csvArr[i]);
+	                    }
+	                }
 
-            sortBySemster = function(a, b) {
-                return a.semester - b.semester;
-            };
+	            sortBySemster = function(a, b) {
+	                return a.semester - b.semester;
+	            };
 
-            mediaModules.sort(sortBySemster);
-            webmobileModules.sort(sortBySemster);
-            generalModules.sort(sortBySemster);
+	            mediaModules.sort(sortBySemster);
+	            webmobileModules.sort(sortBySemster);
+	            generalModules.sort(sortBySemster);
 
-			window.mediaModules = mediaModules;
-            window.webmobileModules = webmobileModules;
-            window.generalModules = generalModules;
+	            window.allModules = csvArr;
+				window.mediaModules = mediaModules;
+	            window.webmobileModules = webmobileModules;
+	            window.generalModules = generalModules;
 
-			forceRerender();
+				forceRerender();
+			})
 		})
 
 		forceRerender = () => {
-
 			$('#dataTable tr:not(#headerRow)').remove();
             // Medienproduktion
 			var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
@@ -72,7 +78,7 @@
                 mediaRow+= '<td>';
                 window.mediaModules.forEach((item) => {
                     if(parseInt(item.semester) == i){
-                        mediaRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
+                        mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
                     }
                 })
                 mediaRow += '</td>';
@@ -87,7 +93,7 @@
                 webmobileRow+= '<td>';
                 window.webmobileModules.forEach((item) => {
                     if(parseInt(item.semester) == i){
-                        webmobileRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
+                        webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
                     }
                 })
                 webmobileRow += '</td>';
@@ -102,7 +108,7 @@
                 generalRow+= '<td>';
                 window.generalModules.forEach((item) => {
                     if(parseInt(item.semester) == i){
-                        generalRow +='<div class="modul"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
+                        generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
                     }
                 })
                 generalRow += '</td>';
@@ -121,10 +127,12 @@
 
 		parseCsvLine = (lineString) => {
 			let module = {}
-			let objectValues = lineString.split(',');
+			let objectValues = lineString.split('铁');
 			objectValues.forEach((value, index, array) => {
 				if (window.csvDefinition[index]) {
-					module[window.csvDefinition[index]] = value;
+					let valueRemoveDoubleBreaks = value.replace(/药药/g, '药');
+					let valueConvertedLineBreaks = valueRemoveDoubleBreaks.replace(/药/g, '<br>')
+					module[window.csvDefinition[index]] = valueConvertedLineBreaks;
 				}
 			})
 
@@ -146,6 +154,17 @@
 
 			window.currentModuleData = filteredModuleData;
 			forceRerender();
+		}
+
+		getModuleInfo = (id) => {
+			let returnItem = null;
+			window.allModules.forEach((item) => {
+				if (item.id == id) {
+					returnItem = item;
+				}
+			})
+
+			return returnItem;
 		}
 	</script>
 
@@ -180,6 +199,7 @@
         <div id="filter" class="filter">
 			<nav>
 			<ul>
+<<<<<<< HEAD
 				<li id="filter0" class="btn0"><a href="#">Alle Semester</a></li>
 				<li id="filter1" class="btn1"><a href="#">1 Sem.</a></li>
 				<li id="filter2" class="btn2"><a href="#">2 Sem.</a></li>
@@ -187,6 +207,15 @@
 				<li id="filter4" class="btn4"><a href="#">4 Sem.</a></li>
 				<li id="filter5" class="btn5"><a href="#">5 Sem.</a></li>
 				<li id="filter6" class="btn6"><a href="#">6 Sem.</a></li>
+=======
+				<li><a href="#">Alle Semester</a></li>
+				<li><a href="#">1 Sem.</a></li>
+				<li><a href="#">2 Sem.</a></li>
+				<li><a href="#">3 Sem.</a></li>
+				<li><a href="#">4 Sem.</a></li>
+				<li><a href="#">5 Sem.</a></li>
+				<li><a href="#">6 Sem.</a></li>
+>>>>>>> neue-csvs-plus-import
             </ul>
             </nav>
         
@@ -206,8 +235,7 @@
       </script>
 
 
-		<div id="Verlaufsplan" class="Verpaufsplan">
-			
+		<div id="Verlaufsplan" class="Verlaufsplan">
 			<table id="dataTable">
 				<tbody>
 					<tr id="headerRow">
@@ -220,7 +248,6 @@
 					<th><p class="semEven">SEMESTER5</p></th>
 					<th><p class="semOdd">SEMESTER6</p></th>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>	  
@@ -228,9 +255,10 @@
   
 	  
 	  
-	  	<!-- POPUP Infos --><div class="popup">
-
-			<div id="titel">Mathematik</div>
+	  	<!-- POPUP Infos -->
+	  	<!-- this is hidden by default. it's content is replaced on module button click and it's shown then -->
+	  	<div class="popup">
+			<div id="module-title" class="module-title">Mathematik</div>
 			<div class="popupcontent">
 				<table>
 					<tbody>
@@ -238,51 +266,37 @@
 					<tr>
 						<td>Kürzel</td>
 						<td>CrP</td>
-						<td>Semseter</td>
+						<td>Semester</td>
 						<td>Pflicht/Wahlpflicht</td>
 						<td>Prüfungsvorleistung</td>
 						<td>Prüfungsleistung</td>
 					</tr>
-
 					<tr>
-						<td>MIB10</td>
-						<td>6</td>
-						<td>2</td>
-						<td>Pflicht</td>
-						<td>Testat</td>
-						<td>Klausur</td>
+						<td id="module-thmId">MIB10</td>
+						<td id="module-creditPoints">6</td>
+						<td id="module-semester">2</td>
+						<td id="module-isMandatory">Pflicht</td>
+						<td id="module-examCondition">Testat</td>
+						<td id="module-examType">Testat</td>
 					</tr>
+
 					<tr>
 						<td colspan="6">Inhalte</td>
 					</tr>
-
 					<tr>
-						<td colspan="6">•	Mengen, Zahlen und Aussagenlogik; Relationen und Funktionen; Folgen, Reihen und Grenzwerte;
-							Stetigkeit und Differenzierbarkeit; Integralrechnung; Differenzen- und Differenzialgleichungen
-							<br><br>•	Ausblick auf die angewandte Statistik
+						<td colspan="6">
+							<p id="module-contents"></p>
 						</td>
 					</tr>
+
 					<tr>
 						<td colspan="6">Angestrebte Lernergebnisse</td>
 					</tr>
 					<tr>
-						<td colspan="6">Fachliche Kompetenzen:
-							<br><br>
-							•	Die Studierenden verstehen mathematische Grundstrukturen und sind in der Lage, die mathematischen 		Konzepte auf Fragestellungen der Informatik anzuwenden.
-							<br><br>
-							•	Das Modul erhält einen Ausblick auf die angewandte Statistik als Vorbereitung auf wiss. Arbeiten.
-
+						<td colspan="6">
+							<p id="module-objective"></p>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="6">Studentischer Aufwand</td>
-					</tr>
-					<tr>
-						<td colspan="6">Präsenzzeit: 60h  Selbststudium: 120h  Gesamtzeit: 180h</td>
-					</tr>
-
-					<br><br>
-
 					</tbody>
 				</table>
 			</div>
