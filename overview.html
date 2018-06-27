@@ -123,7 +123,7 @@
 			let linesParsed = lines.map(parseCsvLine)
 
 			return linesParsed;
-		} 
+		}
 
 		parseCsvLine = (lineString) => {
 			let module = {}
@@ -187,10 +187,8 @@
 			<div data-modal="medienproduktion" class="modal">
 				<div class="modal-content">
 					<span class="close" data-modal-close="medienproduktion">x</span>
-					<video width="64%" height="36%" controls>
-						<source src="assets/video/Labor10.mp4" type="video/mp4">
-							Your browser does not support the video tag.
-						</video>
+					<iframe src="https://player.vimeo.com/video/212748207" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<p><a href="https://vimeo.com/212748207">Labor 10 - Showreel 2017</a> from <a href="https://vimeo.com/laborzehn">Labor 10</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 					</div>
 				</div>
 				<div data-modal="web-n-mobile" class="modal">
@@ -202,17 +200,15 @@
 				<div data-modal="gd" class="modal">
 					<div class="modal-content">
 						<span class="close" data-modal-close="gd">x</span>
-						<video width="64%" height="36%" controls>
-							<source src="assets/video/GDV.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
+						<iframe src="https://player.vimeo.com/video/216981508" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<p><a href="https://vimeo.com/216981508">GDVLAB Showreel 2017</a> from <a href="https://vimeo.com/gdvlab">THM GDVLAB</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 						</div>
 					</div>
 				</div>
 				<button id="klickable"  onclick="dragdown()">
 					<h3>Showreel</br>ansehen</h3>
 				</button>
-			</div>	
+			</div>
 			<div id="filter" class="filter">
 				<nav>
 					<ul>
@@ -225,7 +221,7 @@
 						<li class="btn-sem"><a href="#">6 Sem.</a></li>
 					</ul>
 				</nav>
-				
+
 				<nav>
 					<ul>
 						<li class="btn-spec" onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
@@ -234,10 +230,10 @@
 					</ul>
 				</nav>
 			</div>
-			
+
 			<script src="assets\js\Filteranimation.js"></script>
-			
-			<script type = "text/javascript" 
+
+			<script type = "text/javascript"
 			src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
 		</script>
 
@@ -246,10 +242,10 @@
 			<table id="dataTable">
 				<tbody>
 					<tr id="headerRow">
-						<th></th>	
+						<th></th>
 						<th><p class="semEven">SEMESTER1</p></th>
 						<th><p class="semOdd">SEMESTER2</p></th>
-						<th rowspan="6"><div class="text-rotate">Entscheidung für einen Schwerpunkt Medienproduktion oder Web&amp;Mobile</div></th>	
+						<th rowspan="6"><div class="text-rotate">Entscheidung für einen Schwerpunkt Medienproduktion oder Web&amp;Mobile</div></th>
 						<th><p class="semEven">SEMESTER3</p></th>
 						<th><p class="semOdd">SEMESTER4</p></th>
 						<th><p class="semEven">SEMESTER5</p></th>
@@ -257,11 +253,11 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>	  
-		
-		
-		
-		
+		</div>
+
+
+
+
 		<!-- POPUP Infos -->
 		<!-- this is hidden by default. it's content is replaced on module button click and it's shown then -->
 		<div class="popup">
@@ -310,7 +306,7 @@
 			<a class="close" href="#"><span>&times;</span></a>
 		</div>
 		<div id="modulpopup" class="overlay">
-		</div>	
+		</div>
 		<!-- POPUP Infos-->
 		<script src="assets\js\moduleAnimations.js"></script>
 		<script src="assets\js\modal.js"></script>
