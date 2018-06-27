@@ -78,6 +78,7 @@ body{
  .filter nav {
      position: relative;
      padding-left: 11vw;
+     padding-bottom: 2vh;
 }
  .filter nav ul {
      list-style: none;
