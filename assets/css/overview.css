@@ -296,6 +296,11 @@ body{
  .popupcontent table tbody {
      background: #f4f4f4;
 }
+video{
+    display: block;
+    margin: 0 auto;
+}
+
 /*Popup Fenster ENDE*/
  .modul-back{
      visibility: hidden;
