@@ -78,7 +78,7 @@
             	mediaRow+= '<td>';
             	window.mediaModules.forEach((item) => {
             		if(parseInt(item.semester) == i){
-            			mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
+            			mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div></div>';
             		}
             	})
             	mediaRow += '</td>';
@@ -93,7 +93,7 @@
 				webmobileRow+= '<td>';
 				window.webmobileModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
-						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
+						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div></div>';
 					}
 				})
 				webmobileRow += '</td>';
@@ -108,7 +108,7 @@
 				generalRow+= '<td>';
 				window.generalModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
-						generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
+						generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
 					}
 				})
 				generalRow += '</td>';

@@ -5,42 +5,52 @@ $('.Verlaufsplan').on('click', '.modul .button', function(e) {
     let eventTarget = $(e.target).parents('.modul').first();
     let moduleId = parseInt($(eventTarget).data('moduleid'))
     let moduleData = getModuleInfo(moduleId)
-
+    let moduleFront = $(eventTarget).find(".front");
+    let  popup = $(".popup");
     loadModuleInfoIntoPopup(moduleData);
 
-    $(eventTarget).css("z-index","1");
+     $(eventTarget).css("z-index","8");
     //create a timeline for the current box
     var tl = new TimelineLite({
         paused: true
     });
-    var popup = $(".popup");
+
     tl.to($(eventTarget), 1, {
-        rotationY: 90,
+        rotationY: 180,
         x: (viewportWidth / 2 - $(eventTarget)[0].getBoundingClientRect().left - $(eventTarget).width() / 2),
         y: (viewportHeight / 2 - $(eventTarget)[0].getBoundingClientRect().top - $(eventTarget).height() / 2),
-    })
-    .to(popup, 0.8, {
-        x: (viewportWidth / 2 - popup.width() / 2),
-        y: (viewportHeight / 2  - popup.height() / 2),
+        scaleX: 1.5,
+        scaleY: 1.5,
+    }).to(moduleFront, 0, {
+       autoAlpha:0,
+    },"-=0.7")
+    .fromTo(popup, 0.8, {
+        scaleX: 0.1,
+        scaleY: 0.1,
+        rotationY: 0,
+        autoAlpha: false
+    },{
         scaleX: 1,
         scaleY: 1,
-        rotationY: 0,
         autoAlpha: true
-    }, "-=0.3")
+    }, "-=0.5")
     .to($(".overlay"), 0.8, {
         autoAlpha: true
     }, "-=1");
 
     eventTarget.animation = tl;
-    $(eventTarget).css("z-index","8");
+
     eventTarget.animation.play();
 
     $(".popup").click(function(event) {
+
         eventTarget.animation.reverse();
+        setTimeout( function(){
+            $(eventTarget).css("z-index","4");
+        }  ,2000 );
     });
 })
-
-
+    $(".popup").center();
 var modules = $(".modul");
 sortByX = function(a, b) {
     return a.getBoundingClientRect().left - b.getBoundingClientRect().left
@@ -63,9 +73,7 @@ TweenMax.staggerFromTo(modules, 1, {
     scaleY:1,
     autoAlpha:1
 }, 0.05);
-TweenMax.set($(".popup"), {
-    rotationY: -90
-});
+
 
 viewportWidth = $(window).width();
 viewportHeight = $(window).height();
@@ -75,4 +83,13 @@ loadModuleInfoIntoPopup = (moduleData) => {
     for (var key in moduleData) {
         $('.popup #module-' + key).html(moduleData[key]);
     }
+}
+
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
+        $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+        $(window).scrollLeft()) + "px");
+    return this;
 }
