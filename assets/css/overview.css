@@ -325,6 +325,7 @@ background-repeat: no-repeat;
 background-size: 100% 100%;
 background-position: bottom;
 opacity: 1;
+z-index: -10;
 }
 
 .zusatz_button_container{
