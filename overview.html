@@ -115,7 +115,7 @@
 			}
 			generalRow +='</tr>';
 			$('#dataTable tr:last').after(generalRow);
-
+			$('#dataTable tr:last').after('<tr style="width:100%;height:200px"><td>&nbsp;</td></tr>');
 		}
 
 		parseCsvData = (dataString) => {
