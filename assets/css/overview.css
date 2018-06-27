@@ -344,7 +344,7 @@ position: relative;
   width: 20vw;
   padding: 1vh 2vw;
   font-size: 2vh;
-  z-index: 51;
+  z-index: 76;
 }
 
 #grey_arrow{
@@ -362,7 +362,7 @@ position: relative;
   padding-top: 10vh;
   padding-bottom: 12vh;
   float: left;
-  z-index: 71;
+  z-index: 76;
 }
 
 #klickable{
