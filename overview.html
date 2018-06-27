@@ -34,6 +34,8 @@
 		$(document).ready(function(ev) {
 			// fetch CSV data via AJAX:
 			$.get('./assets/csv/NeuePO_FINAL.csv', (data) => {
+				window.currentlyActiveFilters = [];
+
 				// initialize Data:
 				var csvArr = parseCsvData(data);
 				window.allModules = csvArr;
@@ -43,6 +45,69 @@
 				forceRerender();
 			})
 		})
+
+		addFilterByAnd = (property, value) => {
+
+			if (hasFilter('specialization') && property == 'specialization') {
+				return addFilterByOr(property, value);
+			}
+
+			let keyStr = 'filter-and-' + property;
+			let obj = {}
+			obj[keyStr] = value;
+			window.currentlyActiveFilters.push(obj)
+			let filterFn = (module) => {
+				return (module[property].trim() == value.trim())
+			}
+
+			if (property === '') {
+				filterFn = () => {return true};
+			}
+
+			let filteredModuleData = _.filter(window.filteredModules, filterFn);
+
+			window.filteredModules = filteredModuleData;
+			forceRerender();
+		}
+
+		hasFilter = (property) => {
+			let returnValue = false;
+			_.each(window.currentlyActiveFilters, (filter) => {
+				let filterName = Object.keys(filter)[0]
+				if(filterName.endsWith(property)) {
+					returnValue = true;
+				}
+			});
+
+			return returnValue;
+		}
+
+		addFilterByOr = (property, value) => {
+			if ((hasFilter('specialization') && !hasFilter('semester')) && property === 'semester' ||
+				window.currentlyActiveFilters.length === 0) {
+				console.log('should add or filter, falling back to AND filter!');
+				return addFilterByAnd(property, value);
+			}
+
+			let keyStr = 'filter-or-' + property;
+			let obj = {}
+			obj[keyStr] = value;
+			window.currentlyActiveFilters.push(obj)
+
+			console.log('adding or filter');
+			let filterFn = (module) => {
+				return (module[property].trim() == value.trim())
+			}
+
+			if (property === '') {
+				filterFn = () => {return true};
+			}
+
+			let filteredModuleData = _.filter(window.allModules, filterFn);
+
+			window.filteredModules = _.uniq(_.union(window.filteredModules, filteredModuleData), false, (item) => {return item.thmId});
+			forceRerender();
+		}
 
 		forceRerender = () => {
 
@@ -140,31 +205,6 @@
 			return module;
 		}
 
-		filterBy = (property, value) => {
-           // $(this).css('back')
-			let filterFn = (module) => {
-				return (module[property].trim() == value.trim())
-			}
-
-			if (property === '') {
-				filterFn = () => {return true};
-			}
-            if(property === 'specialization' )
-            {
-                window.filteredModules = window.allModules;
-            }
-
-			let filteredModuleData = _.filter(window.filteredModules, filterFn);
-            if(property === 'semester' && value === 'All')
-            {
-                filteredModuleData = window.allModules;
-            }
-
-			window.filteredModules = filteredModuleData;
-			forceRerender();
-            window.initModulesAnimation();
-		}
-
 		getModuleInfo = (id) => {
 			let returnItem = null;
 			window.allModules.forEach((item) => {
@@ -226,20 +266,20 @@
 				<nav>
 					<ul>
 						<li class="btn-sem" onclick="filterBy('semester', 'All')"><a href="#">Alle Semester</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '1')"><a href="#">1 Sem.</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '2')"><a href="#">2 Sem.</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '3')"><a href="#">3 Sem.</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '4')"><a href="#">4 Sem.</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '5')"><a href="#">5 Sem.</a></li>
-						<li class="btn-sem" onclick="filterBy('semester', '6')"><a href="#">6 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '1')"><a href="#">1 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '2')"><a href="#">2 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '3')"><a href="#">3 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '4')"><a href="#">4 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '5')"><a href="#">5 Sem.</a></li>
+						<li class="btn-sem" onclick="addFilterByOr('semester', '6')"><a href="#">6 Sem.</a></li>
 					</ul>
 				</nav>
 				
 				<nav>
 					<ul>
-						<li class="btn-spec" onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-						<li class="btn-spec" onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-						<li class="btn-spec" onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+						<li class="btn-spec" onclick="addFilterByAnd('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+						<li class="btn-spec" onclick="addFilterByAnd('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+						<li class="btn-spec" onclick="addFilterByAnd('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
 					</ul>
 				</nav>
 			</div>
