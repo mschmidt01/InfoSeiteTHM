@@ -300,4 +300,72 @@ body{
  .modul-back{
      visibility: hidden;
 }
+
+.modal_container{
+  display: block;
+  float: right;
+}
+
+#green_arrow{
+position: absolute;
+top: -100vh;
+left: 0vw;
+z-index: 50;
+width: 100vw;
+height:130vh;
+float: left;
+background-image: url("../img/zusatz_screen.png");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: bottom;
+opacity: 1;
+}
+
+.zusatz_button_container{
+position: relative;
+ top:2.5vh;
+ float: right;
+ width: 80vw;
+ margin-right: 1vh;
+}
+
+.zusatz_button{
+  object-fit: scale-down;
+  overflow: hidden;
+  width: 20vw;
+  padding: 1vh 2vw;
+  font-size: 2vh;
+  z-index: 51;
+}
+
+#grey_arrow{
+  font-size: 1vw;
+  position: absolute;
+  background-image:url("../img/button_arrow_up.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: transparent;
+  border-color: transparent;
+  width: 8.5vw;
+  margin-left: 1.5vw;
+  margin-right: 2vw;
+  top:70vh;
+  padding-top: 10vh;
+  padding-bottom: 12vh;
+  float: left;
+  z-index: 60;
+}
+
+#klickable{
+  position: absolute;
+  display: block;
+  width: 6vw;
+  padding: 0.5vw;
+  top: 102.5vh;
+  margin-left: 2.5vw;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 1vw;
+}
+
  

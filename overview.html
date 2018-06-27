@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semesterplan</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Semesterplan</title>
 	<link rel="stylesheet" href="assets/css/overview.css">
 	<link rel="stylesheet" href="assets/css/modal.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 	<script>
-	let mpmApp = {}
+		let mpmApp = {}
 	</script>
 	<script type="text/javascript" src="assets/csv/data.js"></script>
 	<script type="text/javascript">
@@ -36,34 +36,34 @@
 			$.get('./assets/csv/NeuePO_FINAL.csv', (data) => {
 				// initialize Data:
 				var csvArr = parseCsvData(data);
-	            var mediaModules = [];
-	            var webmobileModules = [];
-	            var generalModules = [];
+				var mediaModules = [];
+				var webmobileModules = [];
+				var generalModules = [];
 
-					for(var i = 0; i< csvArr.length; i++){
-					  if(csvArr[i].specialization === "Allgemein"){
-	                      generalModules.push(csvArr[i]);
-					  }
-	                    if(csvArr[i].specialization === "Web&Mobile"){
-	                        webmobileModules.push(csvArr[i]);
-	                    }
-	                    if(csvArr[i].specialization === "Medienproduktion"){
-	                        mediaModules.push(csvArr[i]);
-	                    }
-	                }
+				for(var i = 0; i< csvArr.length; i++){
+					if(csvArr[i].specialization === "Allgemein"){
+						generalModules.push(csvArr[i]);
+					}
+					if(csvArr[i].specialization === "Web&Mobile"){
+						webmobileModules.push(csvArr[i]);
+					}
+					if(csvArr[i].specialization === "Medienproduktion"){
+						mediaModules.push(csvArr[i]);
+					}
+				}
 
-	            sortBySemster = function(a, b) {
-	                return a.semester - b.semester;
-	            };
+				sortBySemster = function(a, b) {
+					return a.semester - b.semester;
+				};
 
-	            mediaModules.sort(sortBySemster);
-	            webmobileModules.sort(sortBySemster);
-	            generalModules.sort(sortBySemster);
+				mediaModules.sort(sortBySemster);
+				webmobileModules.sort(sortBySemster);
+				generalModules.sort(sortBySemster);
 
-	            window.allModules = csvArr;
+				window.allModules = csvArr;
 				window.mediaModules = mediaModules;
-	            window.webmobileModules = webmobileModules;
-	            window.generalModules = generalModules;
+				window.webmobileModules = webmobileModules;
+				window.generalModules = generalModules;
 
 				forceRerender();
 			})
@@ -72,49 +72,49 @@
 		forceRerender = () => {
 			$('#dataTable tr:not(#headerRow)').remove();
             // Medienproduktion
-			var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
+            var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
 
-			for(var i = 1; i<7 ; i++){
-                mediaRow+= '<td>';
-                window.mediaModules.forEach((item) => {
-                    if(parseInt(item.semester) == i){
-                        mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
-                    }
-                })
-                mediaRow += '</td>';
-			}
-			mediaRow +='</tr>';
+            for(var i = 1; i<7 ; i++){
+            	mediaRow+= '<td>';
+            	window.mediaModules.forEach((item) => {
+            		if(parseInt(item.semester) == i){
+            			mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div>';
+            		}
+            	})
+            	mediaRow += '</td>';
+            }
+            mediaRow +='</tr>';
             $('#dataTable tr:last').after(mediaRow);
 
 			// Web&Mobile
-            var webmobileRow = '<tr><td><div id="title" class="text-rotate">Web&Mobile</div></td>';
+			var webmobileRow = '<tr><td><div id="title" class="text-rotate">Web&Mobile</div></td>';
 
-            for(var i = 1; i<7 ; i++){
-                webmobileRow+= '<td>';
-                window.webmobileModules.forEach((item) => {
-                    if(parseInt(item.semester) == i){
-                        webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
-                    }
-                })
-                webmobileRow += '</td>';
-            }
-            webmobileRow +='</tr>';
-            $('#dataTable tr:last').after(webmobileRow);
+			for(var i = 1; i<7 ; i++){
+				webmobileRow+= '<td>';
+				window.webmobileModules.forEach((item) => {
+					if(parseInt(item.semester) == i){
+						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div>';
+					}
+				})
+				webmobileRow += '</td>';
+			}
+			webmobileRow +='</tr>';
+			$('#dataTable tr:last').after(webmobileRow);
 
 			// Informatik
-            var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
+			var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
 
-            for(var i = 1; i<7 ; i++){
-                generalRow+= '<td>';
-                window.generalModules.forEach((item) => {
-                    if(parseInt(item.semester) == i){
-                        generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
-                    }
-                })
-                generalRow += '</td>';
-            }
-            generalRow +='</tr>';
-            $('#dataTable tr:last').after(generalRow);
+			for(var i = 1; i<7 ; i++){
+				generalRow+= '<td>';
+				window.generalModules.forEach((item) => {
+					if(parseInt(item.semester) == i){
+						generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div>';
+					}
+				})
+				generalRow += '</td>';
+			}
+			generalRow +='</tr>';
+			$('#dataTable tr:last').after(generalRow);
 
 		}
 
@@ -168,134 +168,152 @@
 		}
 	</script>
 
-  </head>
-  <body>
-		<button data-modal-open="medienproduktion" style="z-index:50">medienproduktion zusatzinfos</button>
-		<button data-modal-open="web-n-mobile" style="z-index:50">web & mobile zusatzinfos</button>
-		<button data-modal-open="gd" style="z-index:50">gd zusatzinfos</button>
-		<div data-modal="medienproduktion" class="modal">
-			<div class="modal-content">
-			  <span class="close" data-modal-close="medienproduktion">x</span>
-			  <p>Lorem ipsum dolor sit amet.</p>
-			</div>
-		</div>
-		<div data-modal="web-n-mobile" class="modal">
-			<div class="modal-content">
-			  <span class="close" data-modal-close="web-n-mobile">x</span>
-			  <p>wm kram</p>
-			</div>
-		</div>
-		<div data-modal="gd" class="modal">
-			<div class="modal-content">
-			  <span class="close" data-modal-close="gd">x</span>
-			  <p>gd zeug</p>
-			</div>
-		</div>
-		<header>
+</head>
+<body>
+	<header>
 		<div class="titelheader"><h2>BACHELOR OF SCIENCE</h2><h1>Medieninformatik</h1></div>
-		<div class="logoimg"><img src="assets/img/Logo.png"></div>	
-		</header>
-	
-        <div id="filter" class="filter">
-			<nav>
-			<ul>
-				<li class="btn-sem"><a href="#">Alle Semester</a></li>
-				<li class="btn-sem"><a href="#">1 Sem.</a></li>
-				<li class="btn-sem"><a href="#">2 Sem.</a></li>
-				<li class="btn-sem"><a href="#">3 Sem.</a></li>
-				<li class="btn-sem"><a href="#">4 Sem.</a></li>
-				<li class="btn-sem"><a href="#">5 Sem.</a></li>
-				<li class="btn-sem"><a href="#">6 Sem.</a></li>
-            </ul>
-            </nav>
-        
-            <nav>
-            <ul>
-				<li class="btn-spec" onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
-				<li class="btn-spec" onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
-				<li class="btn-spec" onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
-			</ul>
-			</nav>
-		</div>
-      
-      <script src="assets\js\Filteranimation.js"></script>
-      
-      <script type = "text/javascript" 
-         src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
-      </script>
+		<div class="logoimg"><img src="assets/img/Logo.png"></div>
+
+	</header>
+
+	<div id="green_arrow">
+
+		<button id="grey_arrow" onclick="dragup()">schließen</button>
+		<div class="zusatz_button_container">
+
+			<button class="zusatz_button" data-modal-open="medienproduktion" style="z-index:50">Audio-Visuelle-Medien</button>
+			<button class="zusatz_button" data-modal-open="web-n-mobile" style="z-index:50">Web & Mobile </button>
+			<button class="zusatz_button" data-modal-open="gd" style="z-index:50">Grafische Datenverarbeitung</button>
+			<div data-modal="medienproduktion" class="modal">
+				<div class="modal-content">
+					<span class="close" data-modal-close="medienproduktion">x</span>
+					<video width="64%" height="36%" controls>
+						<source src="assets/video/Labor10.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>
+				</div>
+				<div data-modal="web-n-mobile" class="modal">
+					<div class="modal-content">
+						<span class="close" data-modal-close="web-n-mobile">x</span>
+						<iframe width="64%" height="36%" src="http://hosting.iem.thm.de/mpm-projects/mib2017/mpm2017.html"></iframe>
+					</div>
+				</div>
+				<div data-modal="gd" class="modal">
+					<div class="modal-content">
+						<span class="close" data-modal-close="gd">x</span>
+						<video width="64%" height="36%" controls>
+							<source src="assets/video/GDV.mp4" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>
+					</div>
+				</div>
+				<button id="klickable"  onclick="dragdown()">
+					<h3>Showreel</br>ansehen</h3>
+				</button>
+			</div>	
+			<div id="filter" class="filter">
+				<nav>
+					<ul>
+						<li class="btn-sem"><a href="#">Alle Semester</a></li>
+						<li class="btn-sem"><a href="#">1 Sem.</a></li>
+						<li class="btn-sem"><a href="#">2 Sem.</a></li>
+						<li class="btn-sem"><a href="#">3 Sem.</a></li>
+						<li class="btn-sem"><a href="#">4 Sem.</a></li>
+						<li class="btn-sem"><a href="#">5 Sem.</a></li>
+						<li class="btn-sem"><a href="#">6 Sem.</a></li>
+					</ul>
+				</nav>
+				
+				<nav>
+					<ul>
+						<li class="btn-spec" onclick="filterBy('specialization', 'Allgemein')"><a href="#">Allgemein</a></li>
+						<li class="btn-spec" onclick="filterBy('specialization', 'Web&Mobile')"><a href="#">Web und Mobile</a></li>
+						<li class="btn-spec" onclick="filterBy('specialization', 'Medienproduktion')"><a href="#">Medienproduktion</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+			<script src="assets\js\Filteranimation.js"></script>
+			
+			<script type = "text/javascript" 
+			src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+		</script>
 
 
 		<div id="Verlaufsplan" class="Verlaufsplan">
 			<table id="dataTable">
 				<tbody>
 					<tr id="headerRow">
-					<th></th>	
-					<th><p class="semEven">SEMESTER1</p></th>
-					<th><p class="semOdd">SEMESTER2</p></th>
-					<th rowspan="6"><div class="text-rotate">Entscheidung für einen Schwerpunkt Medienproduktion oder Web&amp;Mobile</div></th>	
-					<th><p class="semEven">SEMESTER3</p></th>
-					<th><p class="semOdd">SEMESTER4</p></th>
-					<th><p class="semEven">SEMESTER5</p></th>
-					<th><p class="semOdd">SEMESTER6</p></th>
+						<th></th>	
+						<th><p class="semEven">SEMESTER1</p></th>
+						<th><p class="semOdd">SEMESTER2</p></th>
+						<th rowspan="6"><div class="text-rotate">Entscheidung für einen Schwerpunkt Medienproduktion oder Web&amp;Mobile</div></th>	
+						<th><p class="semEven">SEMESTER3</p></th>
+						<th><p class="semOdd">SEMESTER4</p></th>
+						<th><p class="semEven">SEMESTER5</p></th>
+						<th><p class="semOdd">SEMESTER6</p></th>
 					</tr>
 				</tbody>
 			</table>
 		</div>	  
-	  
-  
-	  
-	  
-	  	<!-- POPUP Infos -->
-	  	<!-- this is hidden by default. it's content is replaced on module button click and it's shown then -->
-	  	<div class="popup">
+		
+		
+		
+		
+		<!-- POPUP Infos -->
+		<!-- this is hidden by default. it's content is replaced on module button click and it's shown then -->
+		<div class="popup">
 			<div id="module-title" class="module-title">Mathematik</div>
 			<div class="popupcontent">
 				<table>
 					<tbody>
 
-					<tr>
-						<td>Kürzel</td>
-						<td>CrP</td>
-						<td>Semester</td>
-						<td>Pflicht/Wahlpflicht</td>
-						<td>Prüfungsvorleistung</td>
-						<td>Prüfungsleistung</td>
-					</tr>
-					<tr>
-						<td id="module-thmId">MIB10</td>
-						<td id="module-creditPoints">6</td>
-						<td id="module-semester">2</td>
-						<td id="module-isMandatory">Pflicht</td>
-						<td id="module-examCondition">Testat</td>
-						<td id="module-examType">Testat</td>
-					</tr>
+						<tr>
+							<td>Kürzel</td>
+							<td>CrP</td>
+							<td>Semester</td>
+							<td>Pflicht/Wahlpflicht</td>
+							<td>Prüfungsvorleistung</td>
+							<td>Prüfungsleistung</td>
+						</tr>
+						<tr>
+							<td id="module-thmId">MIB10</td>
+							<td id="module-creditPoints">6</td>
+							<td id="module-semester">2</td>
+							<td id="module-isMandatory">Pflicht</td>
+							<td id="module-examCondition">Testat</td>
+							<td id="module-examType">Testat</td>
+						</tr>
 
-					<tr>
-						<td colspan="6">Inhalte</td>
-					</tr>
-					<tr>
-						<td colspan="6">
-							<p id="module-contents"></p>
-						</td>
-					</tr>
+						<tr>
+							<td colspan="6">Inhalte</td>
+						</tr>
+						<tr>
+							<td colspan="6">
+								<p id="module-contents"></p>
+							</td>
+						</tr>
 
-					<tr>
-						<td colspan="6">Angestrebte Lernergebnisse</td>
-					</tr>
-					<tr>
-						<td colspan="6">
-							<p id="module-objective"></p>
-						</td>
-					</tr>
+						<tr>
+							<td colspan="6">Angestrebte Lernergebnisse</td>
+						</tr>
+						<tr>
+							<td colspan="6">
+								<p id="module-objective"></p>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 			<a class="close" href="#">&times;</a>
 		</div>
-	<div id="modulpopup" class="overlay">
-	</div>	
-	<!-- POPUP Infos-->
-	<script src="assets\js\moduleAnimations.js"></script>
-	<script src="assets\js\modal.js"></script>
-  </body>
-</html>
+		<div id="modulpopup" class="overlay">
+		</div>	
+		<!-- POPUP Infos-->
+		<script src="assets\js\moduleAnimations.js"></script>
+		<script src="assets\js\modal.js"></script>
+		<script type="text/javascript" src="assets/js/dragDown.js"></script>
+	</body>
+	</html>
