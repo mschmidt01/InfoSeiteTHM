@@ -36,47 +36,47 @@
 			$.get('./assets/csv/NeuePO_FINAL.csv', (data) => {
 				// initialize Data:
 				var csvArr = parseCsvData(data);
-				var mediaModules = [];
-				var webmobileModules = [];
-				var generalModules = [];
-
-				for(var i = 0; i< csvArr.length; i++){
-					if(csvArr[i].specialization === "Allgemein"){
-						generalModules.push(csvArr[i]);
-					}
-					if(csvArr[i].specialization === "Web&Mobile"){
-						webmobileModules.push(csvArr[i]);
-					}
-					if(csvArr[i].specialization === "Medienproduktion"){
-						mediaModules.push(csvArr[i]);
-					}
-				}
-
-				sortBySemster = function(a, b) {
-					return a.semester - b.semester;
-				};
-
-				mediaModules.sort(sortBySemster);
-				webmobileModules.sort(sortBySemster);
-				generalModules.sort(sortBySemster);
-
 				window.allModules = csvArr;
-				window.mediaModules = mediaModules;
-				window.webmobileModules = webmobileModules;
-				window.generalModules = generalModules;
+				window.filteredModules = csvArr;
+
 
 				forceRerender();
 			})
 		})
 
 		forceRerender = () => {
+
+            var mediaModules = [];
+            var webmobileModules = [];
+            var generalModules = [];
+
+            for(var i = 0; i< window.filteredModules.length; i++){
+                if(window.filteredModules[i].specialization === "Allgemein"){
+                    generalModules.push(window.filteredModules[i]);
+                }
+                if(window.filteredModules[i].specialization === "Web&Mobile"){
+                    webmobileModules.push(window.filteredModules[i]);
+                }
+                if(window.filteredModules[i].specialization === "Medienproduktion"){
+                    mediaModules.push(window.filteredModules[i]);
+                }
+            }
+
+            sortBySemster = function(a, b) {
+                return a.semester - b.semester;
+            };
+
+            mediaModules.sort(sortBySemster);
+            webmobileModules.sort(sortBySemster);
+            generalModules.sort(sortBySemster);
+
 			$('#dataTable tr:not(#headerRow)').remove();
             // Medienproduktion
             var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
 
             for(var i = 1; i<7 ; i++){
             	mediaRow+= '<td>';
-            	window.mediaModules.forEach((item) => {
+            	mediaModules.forEach((item) => {
             		if(parseInt(item.semester) == i){
             			mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div></div>';
             		}
@@ -91,7 +91,7 @@
 
 			for(var i = 1; i<7 ; i++){
 				webmobileRow+= '<td>';
-				window.webmobileModules.forEach((item) => {
+				webmobileModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
 						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div></div>';
 					}
@@ -106,7 +106,7 @@
 
 			for(var i = 1; i<7 ; i++){
 				generalRow+= '<td>';
-				window.generalModules.forEach((item) => {
+				generalModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
 						generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
 					}
@@ -116,6 +116,7 @@
 			generalRow +='</tr>';
 			$('#dataTable tr:last').after(generalRow);
 			$('#dataTable tr:last').after('<tr style="width:100%;height:200px"><td>&nbsp;</td></tr>');
+
 		}
 
 		parseCsvData = (dataString) => {
@@ -140,8 +141,7 @@
 		}
 
 		filterBy = (property, value) => {
-			console.log(property)
-			console.log(value)
+            $(this).css('back')
 			let filterFn = (module) => {
 				return (module[property].trim() == value.trim())
 			}
@@ -149,11 +149,20 @@
 			if (property === '') {
 				filterFn = () => {return true};
 			}
+            if(property === 'specialization' )
+            {
+                window.filteredModules = window.allModules;
+            }
 
-			let filteredModuleData = _.filter(window.allModuleData, filterFn);
+			let filteredModuleData = _.filter(window.filteredModules, filterFn);
+            if(property === 'semester' && value === 'All')
+            {
+                filteredModuleData = window.allModules;
+            }
 
-			window.currentModuleData = filteredModuleData;
+			window.filteredModules = filteredModuleData;
 			forceRerender();
+            window.initModulesAnimation();
 		}
 
 		getModuleInfo = (id) => {
@@ -216,13 +225,13 @@
 			<div id="filter" class="filter">
 				<nav>
 					<ul>
-						<li class="btn-sem"><a href="#">Alle Semester</a></li>
-						<li class="btn-sem"><a href="#">1 Sem.</a></li>
-						<li class="btn-sem"><a href="#">2 Sem.</a></li>
-						<li class="btn-sem"><a href="#">3 Sem.</a></li>
-						<li class="btn-sem"><a href="#">4 Sem.</a></li>
-						<li class="btn-sem"><a href="#">5 Sem.</a></li>
-						<li class="btn-sem"><a href="#">6 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', 'All')"><a href="#">Alle Semester</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '1')"><a href="#">1 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '2')"><a href="#">2 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '3')"><a href="#">3 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '4')"><a href="#">4 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '5')"><a href="#">5 Sem.</a></li>
+						<li class="btn-sem" onclick="filterBy('semester', '6')"><a href="#">6 Sem.</a></li>
 					</ul>
 				</nav>
 				
