@@ -79,6 +79,7 @@ body{
      position: relative;
      padding-left: 11vw;
      padding-bottom: 2vh;
+     z-index: 60;
 }
  .filter nav ul {
      list-style: none;
@@ -327,7 +328,7 @@ background-repeat: no-repeat;
 background-size: 100% 100%;
 background-position: bottom;
 opacity: 1;
-z-index: -10;
+z-index: 50;
 }
 
 .zusatz_button_container{
@@ -362,7 +363,7 @@ position: relative;
   padding-top: 10vh;
   padding-bottom: 12vh;
   float: left;
-  z-index: 60;
+  z-index: 71;
 }
 
 #klickable{
@@ -376,5 +377,3 @@ position: relative;
   border-color: transparent;
   font-size: 1vw;
 }
-
- 
