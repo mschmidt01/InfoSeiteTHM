@@ -20,7 +20,7 @@ timeline.add(TweenMax.from('#meta_info', 8, { ease: Power4.easeOut, x: -2000 }),
 
 timeline.add(TweenMax.from('#button_MA', 2, {ease: Power4.easeOut, x: -1000}),"-=5");
 timeline.add(TweenMax.from('#button_MA',0.1,{css:{zIndex:0}}));
-timeline.add(TweenMax.from('#button_MP', 2, { ease: Power4.easeOut, x: 500 }),"-=5.5");
+timeline.add(TweenMax.from('#button_MP', 2, { ease: Power4.easeOut, x: 1000 }),"-=5.5");
 
 timeline.add(TweenMax.from('#meta_info_text', 2, { opacity:0.0}),"-=5");
 
