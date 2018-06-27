@@ -14,7 +14,6 @@ $(document).ready(() => {
 	$('.modal .close').on('click', (event) => {
 	    $(event.target).parents('.modal').css('display', 'none');
 	    $('iframe').each((index, elem) => {
-	    	console.log(elem)
 	    	oldSrc = $(elem).attr('src');
 	    	$(elem).attr('src', '');
 	    	$(elem).attr('src', oldSrc);
