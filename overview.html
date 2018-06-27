@@ -109,6 +109,12 @@
 			forceRerender();
 		}
 
+		clearFilters = () => {
+			window.currentlyActiveFilters = [];
+			window.filteredModules = window.allModules;
+			forceRerender();
+		}
+
 		forceRerender = () => {
 
             var mediaModules = [];
