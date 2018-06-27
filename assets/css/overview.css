@@ -251,8 +251,7 @@ body{
      -moz-box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
      box-shadow: 4px 4px 10px -5px rgba(0,0,0,0.75);
      background: #ffffff;
-     z-index: 10;
-     overflow: scroll;
+     z-index: 80;
 }
  .module-title {
      text-align: center;
