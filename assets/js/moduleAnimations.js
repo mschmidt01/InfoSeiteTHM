@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ajaxComplete(function() {
 // @TODO fix this to work with delegated events as to also catch events for dynamically created modules…
 // use this as a starting point:
 $('.Verlaufsplan').on('click', '.modul .button', function(e) {
@@ -41,8 +41,7 @@ $('.Verlaufsplan').on('click', '.modul .button', function(e) {
 })
 
 
-modules = $(".modul");
-console.log(modules);
+var modules = $(".modul");
 sortByX = function(a, b) {
     return a.getBoundingClientRect().left - b.getBoundingClientRect().left
 };
@@ -55,10 +54,11 @@ modules.sort(sortByY);
 modules.sort(sortByX);
 
 
-TweenMax.staggerFromTo(modules, 2, {
+TweenMax.staggerFromTo(modules, 1, {
     scaleX: 0.1,
     scaleY:0.1,
     ease: Power3.easeOut,
+    autoAlpha:0
 },{ scaleX: 1,
     scaleY:1,
     autoAlpha:1
