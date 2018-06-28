@@ -2,6 +2,7 @@ $(document).ajaxComplete(function() {
 // @TODO fix this to work with delegated events as to also catch events for dynamically created modules…
 // use this as a starting point:
 $('.Verlaufsplan').on('click', '.modul', function(e) {
+    e.preventDefault();
     let eventTarget = $(e.target).parents('.modul').first();
     let moduleId = parseInt($(eventTarget).data('moduleid'))
     let moduleData = getModuleInfo(moduleId)
