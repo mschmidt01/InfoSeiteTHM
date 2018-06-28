@@ -1,4 +1,4 @@
- body{     font-family: DINl, arial;     overflow: hidden;}
+ body{     font-family: DINl, arial;     overflow-x: hidden;}
 
  p{     margin: 0;     padding: 0;}
 
