@@ -142,9 +142,10 @@
  toplevel passt sich an*/
 /*Filter ENDE*/
 /*Verlaufsplan*/
- .Verlaufsplan {
-     overflow-y: scroll;
-}
+.Verlaufsplan {
+     overflow: visible;
+     overflow-x: scroll;
+     }
  .Verlaufsplan table{
      width: 150vw;
      border-collapse: collapse;
