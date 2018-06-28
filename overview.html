@@ -186,7 +186,7 @@
 			}
 			generalRow +='</tr>';
 			$('#dataTable tr:last').after(generalRow);
-			$('#dataTable tr:last').after('<tr style="width:100%;height:200px"><td>&nbsp;</td></tr>');
+			
 
 		}
 
@@ -225,10 +225,10 @@
 
 </head>
 <body>
-	<header>
-		<div class="titelheader"><h2>BACHELOR OF SCIENCE</h2><h1>Medieninformatik</h1></div>
-		<div class="logoimg"><img src="assets/img/Logo.png"></div>
-
+    <header id="header" class="col-9">
+		<img class="col-5 logo" src="assets/img/Logo.png">
+		<div class="col-5 headertext"><h2>BACHLOR OF SINCE</h2><h1>MEDIENINFORMATIK</h1></div>
+		
 	</header>
 
 	<div id="green_arrow">
@@ -261,10 +261,10 @@
 					</div>
 				</div>
 				<button id="klickable"  onclick="dragdown()">
-					<h3>Showreel</br>ansehen</h3>
+					<h3>Showreel<br>ansehen</h3>
 				</button>
 			</div>
-			<div id="filter" class="filter">
+			<div id="filter" class="col-12 filter">
 				<nav>
 					<ul>
 						<li class="btn-sem" onclick="clearFilters()"><a href="#">Alle Filter entfernen</a></li>
@@ -293,7 +293,7 @@
 		</script>
 
 
-		<div id="Verlaufsplan" class="Verlaufsplan">
+		<div id="Verlaufsplan" class="col-12 Verlaufsplan">
 			<table id="dataTable">
 				<tbody>
 					<tr id="headerRow">
@@ -330,12 +330,12 @@
 							<td>Prüfungsleistung</td>
 						</tr>
 						<tr>
-							<td id="module-thmId">MIB10</td>
-							<td id="module-creditPoints">6</td>
-							<td id="module-semester">2</td>
-							<td id="module-isMandatory">Pflicht</td>
-							<td id="module-examCondition">Testat</td>
-							<td id="module-examType">Testat</td>
+							<td id="module-thmId"></td>
+							<td id="module-creditPoints"></td>
+							<td id="module-semester"></td>
+							<td id="module-isMandatory"></td>
+							<td id="module-examCondition"></td>
+							<td id="module-examType"></td>
 						</tr>
 
 						<tr>

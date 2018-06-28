@@ -1,38 +1,56 @@
-body{
-     font-family: DINl, arial;
-     overflow-y: hidden;
+ body{     font-family: DINl, arial;     overflow-x: hidden;}
+
+ p{     margin: 0;     padding: 0;}
+
+ a{ color: #333;  text-decoration: none;}
+
+
+* {box-sizing: border-box;}
+
+.row::after { content: ""; clear: both; display: block;	}
+
+[class*="col-"] { float: left; padding: 15px; }
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+#header{overflow: auto;	margin-left: 25%; height: auto; color: rgb(74,90,103);}
+
+#header h1{	font-family: DINBlack, Arial, Sans-serif; font-size: 2vw;margin:0; text-transform: uppercase;}
+
+#header h2{	font-family: DINl, Arial, Sans-serif;	font-size: 1vw;margin:0; text-transform: uppercase;}
+
+.logo{float: right; height: auto;}
+
+
+
+@media only screen and (max-width: 768px) {
+    /* Tablet and Mobile */
+	
+    [class*="col-"] {width: 100%;}
+		
+	#header{margin-left: 0;}	
+	#header h1{	font-size: 5vw;}
+	#header h2{	font-size: 2.5vw;}
+	.headertext {text-align: center;}
+	
+	.filter nav {
+		padding-left: 0;}
 }
- header{
-     height: 20vh;
-     width: 99vw;
-     display: flex;
-}
- p{
-     margin: 0;
-     padding: 0;
-}
- a{
-     color: #333;
-     text-decoration: none;
-}
-/*Fläche aufteilung*/
- header{
-     width: 99vw;
-     height: 15vh;
-     display: flex;
-}
- .filter{
-     width: 99.1vw;
-     height: 5vh;
-     font-size: 0.8vw;
-}
- #Verlaufsplan{
-     font-size: 0.7vw;
-     width: 99vw;
-     height: 80vh;
-     overflow:scroll;
-}
-/*Fläche aufteilung ENDE*/
+
+
+
+
 /*Schriften einbinden*/
  @font-face {
      font-family: 'DINBlack';
@@ -47,33 +65,7 @@ body{
      src: url('../font/DINPro-Light.otf') format('truetype');
 }
 /*Schriften einbinden ENDE*/
-/*Header*/
- .titelheader {
-     position: absolute;
-     left: 11vw;
-     top: 5vh;
-}
- .titelheader h1, h2 {
-    color: rgb(74,90,103);
-     text-transform: uppercase;
-     margin:0;
-}
- .titelheader h1{
-     font-family: DINBlack, Arial, Sans-serif;
-     font-size: 2vw;
-}
- .titelheader h2{
-     font-family: DINl, Arial, Sans-serif;
-     font-size: 1vw;
-}
- .logoimg img{
-     width: 40%;
-     display: block;
-     position: absolute;
-     right: 2vw;
-     top: 2vh;
-}
-/*Header ENDE*/
+
 /*Filter*/
  .filter nav {
      position: relative;
@@ -382,4 +374,9 @@ position: relative;
   background-color: transparent;
   border-color: transparent;
   font-size: 1vw;
+}
+
+iframe {
+    width: 75vw;
+    height: 75vh;
 }
