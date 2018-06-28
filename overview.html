@@ -113,6 +113,7 @@
 			window.currentlyActiveFilters = [];
 			window.filteredModules = window.allModules;
 			forceRerender();
+            window.initModulesAnimation();
 		}
 
 		forceRerender = () => {
@@ -133,13 +134,15 @@
                 }
             }
 
-            sortBySemster = function(a, b) {
-                return a.semester - b.semester;
-            };
+            sortByName = function(a, b) {
+                if (a.title < b.title) return -1;
+                if (a.title > b.title) return 1;
+                return 0;
+            }
 
-            mediaModules.sort(sortBySemster);
-            webmobileModules.sort(sortBySemster);
-            generalModules.sort(sortBySemster);
+            mediaModules.sort(sortByName);
+            webmobileModules.sort(sortByName);
+            generalModules.sort(sortByName);
 
 			$('#dataTable tr:not(#headerRow)').remove();
             // Medienproduktion
