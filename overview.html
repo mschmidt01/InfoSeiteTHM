@@ -68,6 +68,12 @@
 
 			window.filteredModules = filteredModuleData;
 			forceRerender();
+            if(property == 'semester'){
+                window.columnAnimation(value);
+            }
+            if(property == 'specialization'){
+                window.initModulesAnimation();
+            }
 		}
 
 		hasFilter = (property) => {
@@ -107,6 +113,12 @@
 
 			window.filteredModules = _.uniq(_.union(window.filteredModules, filteredModuleData), false, (item) => {return item.thmId});
 			forceRerender();
+			if(property == 'semester'){
+                window.columnAnimation(value);
+			}
+            if(property == 'specialization'){
+                window.initModulesAnimation();
+            }
 		}
 
 		clearFilters = () => {
@@ -152,7 +164,7 @@
             	mediaRow+= '<td>';
             	mediaModules.forEach((item) => {
             		if(parseInt(item.semester) == i){
-            			mediaRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div></div>';
+            			mediaRow +='<div class="modul" data-moduleid="' + item.id + '" data-modulsem="' + item.semester + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="MP">Modulbeschreibung</div></a></div></div>';
             		}
             	})
             	mediaRow += '</td>';
@@ -167,7 +179,7 @@
 				webmobileRow+= '<td>';
 				webmobileModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
-						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div></div>';
+						webmobileRow +='<div class="modul" data-moduleid="' + item.id + '" data-modulsem="' + item.semester + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="WM">Modulbeschreibung</div></a></div></div>';
 					}
 				})
 				webmobileRow += '</td>';
@@ -182,7 +194,7 @@
 				generalRow+= '<td>';
 				generalModules.forEach((item) => {
 					if(parseInt(item.semester) == i){
-						generalRow +='<div class="modul" data-moduleid="' + item.id + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
+						generalRow +='<div class="modul" data-moduleid="' + item.id + '" data-modulsem="' + item.semester + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
 					}
 				})
 				generalRow += '</td>';
