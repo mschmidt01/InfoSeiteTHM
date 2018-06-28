@@ -157,6 +157,21 @@
             generalModules.sort(sortByName);
 
 			$('#dataTable tr:not(#headerRow)').remove();
+            // Allgemein
+            var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
+
+            for(var i = 1; i<7 ; i++){
+                generalRow+= '<td>';
+                generalModules.forEach((item) => {
+                    if(parseInt(item.semester) == i){
+                        generalRow +='<div class="modul" data-moduleid="' + item.id + '" data-modulsem="' + item.semester + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
+                    }
+                })
+                generalRow += '</td>';
+            }
+            generalRow +='</tr>';
+            $('#dataTable tr:last').after(generalRow);
+
             // Medienproduktion
             var mediaRow = '<tr><td><div id="title" class="text-rotate">Medienproduktion</div></td>';
 
@@ -187,20 +202,7 @@
 			webmobileRow +='</tr>';
 			$('#dataTable tr:last').after(webmobileRow);
 
-			// Informatik
-			var generalRow = '<tr><td><div id="title" class="text-rotate">Allgemein</div></td>';
 
-			for(var i = 1; i<7 ; i++){
-				generalRow+= '<td>';
-				generalModules.forEach((item) => {
-					if(parseInt(item.semester) == i){
-						generalRow +='<div class="modul" data-moduleid="' + item.id + '" data-modulsem="' + item.semester + '"><div class="front"><div id="title"><b>'+item.title+'</b></div><a class="button" href="#"><div id="BottomButton">Modulbeschreibung</div></a></div></div>';
-					}
-				})
-				generalRow += '</td>';
-			}
-			generalRow +='</tr>';
-			$('#dataTable tr:last').after(generalRow);
 			
 
 		}
