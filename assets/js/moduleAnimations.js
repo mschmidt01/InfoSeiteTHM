@@ -52,35 +52,8 @@ $('.Verlaufsplan').on('click', '.modul', function(e) {
 })
 
 
-    window.initModulesAnimation=function(){
-        $(".popup").center();
-        var modules = $(".modul");
-        sortByX = function(a, b) {
-            return a.getBoundingClientRect().left - b.getBoundingClientRect().left
-        };
-
-        sortByY = function(a, b) {
-            return a.getBoundingClientRect().top - b.getBoundingClientRect().top
-        };
-
-        modules.sort(sortByY);
-        modules.sort(sortByX);
 
 
-        TweenMax.staggerFromTo(modules, 1, {
-            scaleX: 0.1,
-            scaleY:0.1,
-            ease: Power3.easeOut,
-            autoAlpha:0
-        },{ scaleX: 1,
-            scaleY:1,
-            autoAlpha:1
-        }, 0.05);
-
-
-        viewportWidth = $(window).width();
-        viewportHeight = $(window).height();
-    }
     window.initModulesAnimation();
 
 });
@@ -99,3 +72,48 @@ jQuery.fn.center = function () {
         $(window).scrollLeft()) + "px");
     return this;
 }
+window.initModulesAnimation=function(){
+    $(".popup").center();
+    var modules = $(".modul");
+    sortByX = function(a, b) {
+        return a.getBoundingClientRect().left - b.getBoundingClientRect().left
+    };
+
+    sortByY = function(a, b) {
+        return a.getBoundingClientRect().top - b.getBoundingClientRect().top
+    };
+
+    modules.sort(sortByY);
+    modules.sort(sortByX);
+
+
+    TweenMax.staggerFromTo(modules, 1, {
+        scaleX: 0.1,
+        scaleY:0.1,
+        ease: Power3.easeOut,
+        autoAlpha:0
+    },{ scaleX: 1,
+        scaleY:1,
+        autoAlpha:1
+    }, 0.05);
+
+
+    viewportWidth = $(window).width();
+    viewportHeight = $(window).height();
+};
+
+window.columnAnimation=function( semester){
+     semesterModules = $('*[data-modulsem="'+semester+'"]');
+    console.log(semesterModules);
+
+    TweenMax.staggerFromTo(semesterModules, 1, {
+        scaleX: 0.1,
+        scaleY:0.1,
+        ease: Power3.easeOut,
+        autoAlpha:0
+    },{ scaleX: 1,
+        scaleY:1,
+        autoAlpha:1
+    }, 0.05);
+
+};
