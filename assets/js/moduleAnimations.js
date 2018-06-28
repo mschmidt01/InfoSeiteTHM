@@ -7,6 +7,7 @@ $('.Verlaufsplan').on('click', '.modul', function(e) {
     let moduleData = getModuleInfo(moduleId)
     let moduleFront = $(eventTarget).find(".front");
     let  popup = $(".popup");
+    popup.center();
     loadModuleInfoIntoPopup(moduleData);
 
      $(eventTarget).css("z-index","8");
@@ -52,7 +53,61 @@ $('.Verlaufsplan').on('click', '.modul', function(e) {
 })
 
 
+    window.initModulesAnimation=function(){
+        $(".popup").center();
+        var modules = $(".modul");
+        sortByX = function(a, b) {
+            return a.getBoundingClientRect().left - b.getBoundingClientRect().left
+        };
 
+        sortByY = function(a, b) {
+            return a.getBoundingClientRect().top - b.getBoundingClientRect().top
+        };
+
+        modules.sort(sortByY);
+        modules.sort(sortByX);
+
+
+        TweenMax.staggerFromTo(modules, 1, {
+            scaleX: 0.1,
+            scaleY:0.1,
+            ease: Power3.easeOut,
+            autoAlpha:0
+        },{ scaleX: 1,
+            scaleY:1,
+            autoAlpha:1
+        }, 0.05);
+
+
+        viewportWidth = $(window).width();
+        viewportHeight = $(window).height();
+    }
+
+    window.columnAnimation=function( semester) {
+        $(".popup").center();
+        semesterModules = $('*[data-modulsem="' + semester + '"]');
+        console.log(semesterModules);
+
+        TweenMax.staggerFromTo(semesterModules, 1, {
+            scaleX: 0.1,
+            scaleY: 0.1,
+            ease: Power3.easeOut,
+            autoAlpha: 0
+        }, {
+            scaleX: 1,
+            scaleY: 1,
+            autoAlpha: 1
+        }, 0.05)
+    }
+
+    jQuery.fn.center = function () {
+        this.css("position","absolute");
+        this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
+            $(window).scrollTop()) + "px");
+        this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+            $(window).scrollLeft()) + "px");
+        return this;
+    }
 
     window.initModulesAnimation();
 
@@ -62,58 +117,7 @@ loadModuleInfoIntoPopup = (moduleData) => {
     for (var key in moduleData) {
         $('.popup #module-' + key).html(moduleData[key]);
     }
-}
-
-jQuery.fn.center = function () {
-    this.css("position","absolute");
-    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
-        $(window).scrollTop()) + "px");
-    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
-        $(window).scrollLeft()) + "px");
-    return this;
-}
-window.initModulesAnimation=function(){
-    $(".popup").center();
-    var modules = $(".modul");
-    sortByX = function(a, b) {
-        return a.getBoundingClientRect().left - b.getBoundingClientRect().left
-    };
-
-    sortByY = function(a, b) {
-        return a.getBoundingClientRect().top - b.getBoundingClientRect().top
-    };
-
-    modules.sort(sortByY);
-    modules.sort(sortByX);
-
-
-    TweenMax.staggerFromTo(modules, 1, {
-        scaleX: 0.1,
-        scaleY:0.1,
-        ease: Power3.easeOut,
-        autoAlpha:0
-    },{ scaleX: 1,
-        scaleY:1,
-        autoAlpha:1
-    }, 0.05);
-
-
-    viewportWidth = $(window).width();
-    viewportHeight = $(window).height();
 };
 
-window.columnAnimation=function( semester){
-     semesterModules = $('*[data-modulsem="'+semester+'"]');
-    console.log(semesterModules);
 
-    TweenMax.staggerFromTo(semesterModules, 1, {
-        scaleX: 0.1,
-        scaleY:0.1,
-        ease: Power3.easeOut,
-        autoAlpha:0
-    },{ scaleX: 1,
-        scaleY:1,
-        autoAlpha:1
-    }, 0.05);
 
-};
