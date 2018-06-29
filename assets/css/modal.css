@@ -23,6 +23,11 @@
     z-index: 100;
 }
 
+iframe{
+  margin: 0 auto;
+  display: block;
+}
+
 /* btn:; */
 .close {
     color: #aaaaaa;
@@ -37,5 +42,3 @@
     text-decoration: none;
     cursor: pointer;
 }
-
-
